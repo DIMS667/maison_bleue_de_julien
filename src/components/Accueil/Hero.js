@@ -17,7 +17,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8 flex justify-end">
         <div className="text-right">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Bienvenue à la Maison Bleue de Julien
+            Bienvenue à la Maison Bleue de Julien github
           </h1>
           <p className="mt-6 max-w-3xl text-lg text-blue-100">
           Notre association accompagne les personnes autistes et leurs familles en offrant un espace inclusif et chaleureux.
