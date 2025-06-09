@@ -1,9 +1,9 @@
-name: Deploy React App to cPanel (via FTP)
+name: Deploy React to cPanel
 
 on:
   push:
     branches:
-      - main  # ou master si ta branche principale s'appelle comme ça
+      - main  # ou master si c’est ta branche principale
 
 jobs:
   build-and-deploy:
@@ -16,13 +16,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # ou la version que tu utilises
+          node-version: '18'
 
       - name: Install dependencies
-        run: yarn install  # ou npm install
+        run: yarn install
 
-      - name: Build project
-        run: yarn build  # ou npm run build
+      - name: Build the React project
+        run: yarn build
 
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
