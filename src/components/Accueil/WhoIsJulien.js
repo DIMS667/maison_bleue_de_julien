@@ -16,7 +16,7 @@ function WhoIsJulien() {
         <div className="flex-shrink-0 transform rotate-[-3deg] hover:rotate-0 transition duration-300">
           <img
             src={J1}
-            alt="Julien Image 1"
+            alt="Julien  1"
             className="w-40 h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 object-cover rounded-lg shadow-lg border-4 border-gray-300"
           />
         </div>
@@ -25,7 +25,7 @@ function WhoIsJulien() {
         <div className="flex-shrink-0 transform scale-105 hover:scale-110 transition duration-300">
           <img
             src={J3}
-            alt="Julien Image 3"
+            alt="Julien  3"
             className="w-40 h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 object-cover rounded-lg shadow-lg border-4 border-white"
           />
         </div>
