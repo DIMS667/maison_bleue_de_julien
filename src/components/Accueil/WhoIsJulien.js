@@ -41,7 +41,7 @@ function WhoIsJulien() {
           Qui est Julien ?
         </TypingAnimation>
         <p className="mt-6 text-lg lg:text-xl text-gray-700 leading-relaxed">
-          C’est le prototype identitaire de la cible de la MBJ.
+          C’est le prototype identitaire identitaire de la cible de la MBJ.
           Julien c’est une personne autiste qui a besoin de tout le soutien nécessaire pour son développement et son insertion socioprofessionnelle.
           Julien c’est aussi ce frère ou sœur, ce parent ou ami d’une personne autiste et qui a besoin de soutien moral, informatif etc.
           afin de lui apporter un appui de qualité. Julien c’est toi, c’est moi, c’est toute personne physique ou morale qui accompagne cette association.
