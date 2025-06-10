@@ -1,0 +1,107 @@
+Folder PATH listing
+Volume serial number is A6C4-64EB
+C:.
+|   App.css
+|   App.js
+|   App.test.js
+|   index.css
+|   index.js
+|   logo.svg
+|   README.md
+|   reportWebVitals.js
+|   setupTests.js
+|   structure.txt
+|   
++---assets
+|   \---images
+|           11.jpg
+|           22.jpg
+|           activite1.jpg
+|           activite2.jpg
+|           activite3.jpg
+|           activite4.jpg
+|           actu1.jpg
+|           actu2.jpg
+|           actu3.jpg
+|           actu4.jpg
+|           actu5.jpg
+|           actu7.jpg
+|           edu.jpg
+|           firt.jpg
+|           gal.jpg
+|           gal1.jpg
+|           gal2.jpg
+|           gal3.jpg
+|           gal4.jpg
+|           group2.jpg
+|           groupe1.jpg
+|           hero.jpg
+|           images.jpeg
+|           juju.jpg
+|           maison_bleu.jpg
+|           moi et ma mere.jpg
+|           moi et mon pere.jpg
+|           mtn.jpeg
+|           orange.png
+|           part.jpg
+|           part1.png
+|           part10.jpg
+|           part11.jpg
+|           part12.jpg
+|           part13.jpg
+|           part14.jpg
+|           part15.jpg
+|           part16.jpg
+|           part17.jpg
+|           part18.jpg
+|           part19.jpg
+|           part20.jpg
+|           part3.jpg
+|           part4.jpg
+|           part5.jpg
+|           part6.jpg
+|           part7.jpg
+|           part8.jpg
+|           part9.jpg
+|           temoin.jpg
+|           temoin1.jpg
+|           unsplash_ecRuhwPIW7c_kid play.jpg
+|           unsplash_eOo5SKU3cK4_Lack of eye contact of two children.jpg
+|           unsplash_zmNBVKgkW1c_behavioral problems.jpg
+|           WhatsApp Image 2024-10-07 at 14.08.52_331a06cd.jpg
+|           WhatsApp Image 2024-10-15 at 00.37.46_858a1b4d.jpg
+|           WhatsApp Image 2024-10-15 at 00.37.46_a7d3aff7.jpg
+|           WhatsApp Image 2024-11-18 at 00.34.51_d46d7e96.jpg
+|           
++---components
+|   |   Footer.js
+|   |   MagicCard.js
+|   |   Navbar.js
+|   |   ShimmerButton.js
+|   |   TypingAnimation.js
+|   |   
+|   +---Accueil
+|   |       CompanyIntro.js
+|   |       Hero.js
+|   |       NewsCards.js
+|   |       PartnerLogosCarousel.js
+|   |       Testimonials.js
+|   |       WhoIsJulien.js
+|   |       
+|   \---Actualite
+|           GalleryCard.js
+|           GallerySection.js
+|           ProgramCard.js
+|           ProgramsSection.js
+|           
+\---pages
+        Accueil.js
+        Actualite.js
+        Adherer.js
+        Autisme.js
+        ContactPage.js
+        Don.js
+        DonSuccess.js
+        JulienPage.js
+        MbjPage.js
+        
