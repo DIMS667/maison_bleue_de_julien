@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Camera, Play, Pause, ChevronLeft, ChevronRight, Share2, Heart } from 'lucide-react';
-import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+
 
 import activity1 from "../../assets/images/activite1.jpg";
 import activity2 from "../../assets/images/activite2.jpg";

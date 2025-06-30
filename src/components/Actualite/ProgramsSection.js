@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Calendar, Star, Clock, ArrowRight, Sparkles, Award, Filter, X, Tag, Users, Palette, Umbrella, Hammer, Tent } from 'lucide-react';
+import { Calendar, Star, Clock, ArrowRight, Sparkles, Award, Filter, X, Tag } from 'lucide-react';
 
 // programme nouveau
 import actu from "../../assets/images/firt.jpg";

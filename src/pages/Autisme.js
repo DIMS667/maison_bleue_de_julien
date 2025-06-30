@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaFacebook, FaInstagram, FaYoutube, FaHeart, FaUsers, FaLightbulb, FaHandsHelping, FaChartLine, FaStethoscope, FaGlobe, FaBookOpen, FaPhone } from "react-icons/fa";
-import { Puzzle, TrendingUp, Globe, Eye, Brain, Calendar, BookOpen, Phone, X, Check, Award, MessageCircle, Wrench, Activity, UsersIcon, Heart } from "lucide-react";
+import {  FaHeart,  FaHandsHelping,  FaStethoscope, FaGlobe, FaBookOpen, FaPhone } from "react-icons/fa";
+import { Puzzle, TrendingUp, Globe, Eye, Brain, Calendar, BookOpen,  X, Check, Award, MessageCircle, Wrench, Activity, UsersIcon, Heart } from "lucide-react";
 
 const EnhancedAutismePage = () => {
   return (
@@ -395,41 +395,6 @@ const EnhancedAutismePage = () => {
           </div>
         </section>
 
-        {/* Section : Réseaux sociaux */}
-        {/* <section className="text-center">
-          <div className="bg-white rounded-3xl p-8 shadow-xl border border-blue-100">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6">
-              Rejoignez-nous sur nos réseaux sociaux !
-            </h3>
-            
-            <div className="flex justify-center gap-6">
-              <a
-                href="https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                <FaFacebook className="text-2xl text-white" />
-              </a>
-              <a
-                href="https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                <FaInstagram className="text-2xl text-white" />
-              </a>
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                <FaYoutube className="text-2xl text-white" />
-              </a>
-            </div>
-          </div>
-        </section> */}
       </main>
     </div>
   );

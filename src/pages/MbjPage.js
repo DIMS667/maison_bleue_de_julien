@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaBookOpen, FaHandHoldingHeart, FaBullhorn, FaBriefcase, FaDownload, FaChevronLeft, FaChevronRight, FaHeart, FaUsers, FaCalendar, FaFileAlt } from 'react-icons/fa';
+
 import { BookOpen, Heart, Megaphone, Briefcase, Users, Target, Award, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import groupe1 from '../assets/images/groupe1.jpg';
 import groupe2 from '../assets/images/group2.jpg';

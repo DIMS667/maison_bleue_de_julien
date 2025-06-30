@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import orangeLogo from "../assets/images/orange.png";
 import mtnLogo from "../assets/images/mtn.jpeg";
-import { FaHeart, FaShieldAlt, FaUsers, FaGraduationCap, FaHandHoldingHeart, FaCreditCard, FaMobileAlt } from 'react-icons/fa';
+
 import { Heart, Shield, Users, GraduationCap, CreditCard, Smartphone, ChevronRight } from 'lucide-react';
 
 const EnhancedDon = () => {
@@ -324,7 +324,7 @@ const EnhancedDon = () => {
               des opportunités pour les personnes autistes. Ensemble, construisons un monde plus bienveillant.
             </p>
             
-            {/* Statistiques de dons */}
+           
           
           </div>
         </div>
