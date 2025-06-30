@@ -89,15 +89,15 @@ const EnhancedFooter = () => {
                 
                 <div className="flex items-center space-x-3">
                   <FaPhone className="w-5 h-5 text-cyan-300 flex-shrink-0" />
-                  <a href="tel:+237123456789" className="text-cyan-200 hover:text-white transition-colors duration-300">
-                    +237 123 456 789
+                  <a href="tel:+237699893838" className="text-cyan-200 hover:text-white transition-colors duration-300">
+                    +237 6 99 89 38 38
                   </a>
                 </div>
                 
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="w-5 h-5 text-cyan-300 flex-shrink-0" />
                   <a href="mailto:contact@maisonbleue.cm" className="text-cyan-200 hover:text-white transition-colors duration-300">
-                    contact@maisonbleue.cm
+                    jeannetonye@maisonbleudejulien.org
                   </a>
                 </div>
               </div>
