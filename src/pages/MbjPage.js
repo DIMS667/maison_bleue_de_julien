@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { BookOpen, Heart, Megaphone, Briefcase, Users, Target, Award, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+// Remplacez cette ligne d'import pour utiliser Lucide React au lieu de react-icons
+import { BookOpen, Heart, Megaphone, Briefcase, Users, Target, Award, Download, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import groupe1 from '../assets/images/groupe1.jpg';
 import groupe2 from '../assets/images/group2.jpg';
 
@@ -261,7 +262,7 @@ const EnhancedMbjPage = () => {
           <div className="bg-white rounded-3xl p-8 shadow-xl border border-cyan-100">
             <div className="flex items-center mb-6">
               <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mr-4">
-                <FaFileAlt className="text-2xl text-white" />
+                <FileText className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
                 Nos rapports annuels
