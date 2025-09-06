@@ -7,6 +7,7 @@ import act5 from "../../assets/images/actu5.jpg";
 import act7 from "../../assets/images/actu7.jpg";
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaCalendarAlt, FaArrowRight, FaPalette, FaUsers, FaCampground } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const newsData = [
   {
@@ -196,17 +197,17 @@ const EnhancedNewsCards = () => {
           })}
         </div>
 
-        {/* Bouton "Plus d'actualités" amélioré */}
+        {/* Bouton "Plus d'actualités" */}
         <div className="text-center">
           <div className="relative group inline-block">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
-            <button
-              onClick={() => window.location.href = "/actualite"}
+            <Link
+              to="/actualite"
               className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3"
             >
               <span>Plus d'actualités</span>
               <FaArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
