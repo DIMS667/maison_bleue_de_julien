@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHeart, FaUsers, FaHandsHelping, FaArrowRight, FaQuoteLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import maisonBleu from '../../assets/images/maison_bleu.jpg';
 
 const EnhancedCompanyIntro = () => {
@@ -102,19 +103,19 @@ const EnhancedCompanyIntro = () => {
 
             {/* Boutons d'action */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a href="/mbj" className="flex-1 sm:flex-none">
+              <Link to="/mbj" className="flex-1 sm:flex-none">
                 <button className="group w-full inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                   <span>Découvrez nos projets</span>
                   <FaArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
-              </a>
+              </Link>
               
-              <a href="/autisme" className="flex-1 sm:flex-none">
+              <Link to="/autisme" className="flex-1 sm:flex-none">
                 <button className="group w-full inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-blue-700 bg-white border-2 border-blue-200 rounded-xl shadow-lg hover:shadow-xl hover:bg-blue-50 hover:border-blue-300 transform hover:-translate-y-1 transition-all duration-300">
                   <FaHeart className="mr-3 w-5 h-5 text-red-500" />
                   <span>Comprendre l'autisme</span>
                 </button>
-              </a>
+              </Link>
             </div>
 
             {/* Appel à l'action secondaire */}
@@ -124,11 +125,11 @@ const EnhancedCompanyIntro = () => {
                   <h4 className="text-lg font-semibold text-blue-900 mb-1">Rejoignez notre communauté</h4>
                   <p className="text-blue-700">Ensemble, construisons un avenir plus inclusif</p>
                 </div>
-                <a href="/adherer">
-                  <button className="px-6 py-2 bg-white text-blue-700 rounded-lg shadow-md hover:shadow-lg font-semibold border border-blue-200 hover:bg-blue-50 transition-all duration-300 whitespace-nowrap">
+                <Link to="/adherer">
+                  <button className="px-6 py-2 bg-white text-blue-700 rounded-lg shadow-md hover:shadow-lg font-semibold border border-blue-200 hover:bg-blue-50 transition-all durée-300 whitespace-nowrap">
                     Adhérer
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
