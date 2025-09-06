@@ -15,7 +15,7 @@ export default function EnhancedHero() {
 
       {/* Main hero background with better overlay */}
       <div className="absolute inset-0">
-        <div
+        <div 
           className="h-full w-full bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%233B82F6;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%2306B6D4;stop-opacity:0.6" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23grad1)"/></svg>')`
@@ -29,6 +29,7 @@ export default function EnhancedHero() {
       <div className="relative z-10 min-h-screen flex items-center pt-28 sm:pt-32 lg:pt-20 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            
             {/* Left column - Main content - responsive */}
             <div className="space-y-6 lg:space-y-8 text-center lg:text-left">
               {/* Badge avec couleurs du logo - responsive et visibilité améliorée */}
@@ -46,14 +47,14 @@ export default function EnhancedHero() {
                   </span>
                   <span className="block">de Julien</span>
                 </h1>
-
+                
                 <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto lg:mx-0"></div>
               </div>
 
               {/* Description avec couleurs harmonisées - responsive */}
               <p className="text-base sm:text-lg lg:text-xl text-cyan-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Notre association accompagne avec bienveillance les personnes autistes et leurs familles,
-                en créant un <span className="text-cyan-300 font-semibold">espace inclusif et chaleureux</span>
+                Notre association accompagne avec bienveillance les personnes autistes et leurs familles, 
+                en créant un <span className="text-cyan-300 font-semibold">espace inclusif et chaleureux</span> 
                 où chacun peut s'épanouir.
               </p>
 
@@ -69,24 +70,22 @@ export default function EnhancedHero() {
                 </div>
               </div>
 
-              {/* CTA Links (styled as buttons) - React Router safe */}
+              {/* CTA Buttons avec couleurs du logo - responsive et améliorés */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 max-w-md mx-auto lg:max-w-none lg:mx-0">
-                <Link
-                  to="/don"
-                  className="flex-1 sm:flex-none w-full group relative inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-red-500 via-pink-500 to-red-600 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-red-400/20"
-                >
-                  <FaDonate className="mr-2 sm:mr-3 w-4 sm:w-5 h-4 sm:h-5" />
-                  Faire un Don
-                  <div className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                <Link to="/don" className="flex-1 sm:flex-none">
+                  <button className="w-full group relative inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-red-500 via-pink-500 to-red-600 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-red-400/20">
+                    <FaDonate className="mr-2 sm:mr-3 w-4 sm:w-5 h-4 sm:h-5" />
+                    Faire un Don
+                    <div className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  </button>
                 </Link>
-
-                <Link
-                  to="/adherer"
-                  className="flex-1 sm:flex-none w-full group relative inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-semibold text-white bg-cyan-600/90 backdrop-blur-sm border border-cyan-400/60 rounded-2xl shadow-xl hover:shadow-2xl hover:bg-cyan-500/90 transform hover:-translate-y-1 transition-all duration-300"
-                >
-                  <FaUserPlus className="mr-2 sm:mr-3 w-4 sm:w-5 h-4 sm:h-5" />
-                  Nous Rejoindre
-                  <div className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                
+                <Link to="/adherer" className="flex-1 sm:flex-none">
+                  <button className="w-full group relative inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-semibold text-white bg-cyan-600/90 backdrop-blur-sm border border-cyan-400/60 rounded-2xl shadow-xl hover:shadow-2xl hover:bg-cyan-500/90 transform hover:-translate-y-1 transition-all duration-300">
+                    <FaUserPlus className="mr-2 sm:mr-3 w-4 sm:w-5 h-4 sm:h-5" />
+                    Nous Rejoindre
+                    <div className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                  </button>
                 </Link>
               </div>
             </div>
@@ -97,7 +96,7 @@ export default function EnhancedHero() {
                 {/* Decorative elements avec couleurs du logo */}
                 <div className="absolute -top-4 -right-4 w-64 xl:w-72 h-64 xl:h-72 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 rounded-full blur-3xl"></div>
                 <div className="absolute -bottom-8 -left-8 w-56 xl:w-64 h-56 xl:h-64 bg-gradient-to-br from-red-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
-
+                
                 {/* Main visual card avec couleurs harmonisées */}
                 <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-6 xl:p-8 border border-cyan-200/20 shadow-2xl">
                   <div className="space-y-4 xl:space-y-6">
@@ -110,7 +109,7 @@ export default function EnhancedHero() {
                         <p className="text-cyan-200 text-sm xl:text-base">Pour chaque famille</p>
                       </div>
                     </div>
-
+                    
                     <div className="space-y-3 xl:space-y-4">
                       <div className="bg-white/5 rounded-lg p-3 xl:p-4">
                         <div className="text-xs xl:text-sm text-cyan-200 mb-2">Activités adaptées</div>
@@ -118,14 +117,14 @@ export default function EnhancedHero() {
                           <div className="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full w-4/5"></div>
                         </div>
                       </div>
-
+                      
                       <div className="bg-white/5 rounded-lg p-3 xl:p-4">
                         <div className="text-xs xl:text-sm text-cyan-200 mb-2">Soutien familial</div>
                         <div className="w-full bg-blue-900/50 rounded-full h-2">
                           <div className="bg-gradient-to-r from-green-400 to-cyan-400 h-2 rounded-full w-5/6"></div>
                         </div>
                       </div>
-
+                      
                       <div className="bg-white/5 rounded-lg p-3 xl:p-4">
                         <div className="text-xs xl:text-sm text-cyan-200 mb-2">Inclusion sociale</div>
                         <div className="w-full bg-blue-900/50 rounded-full h-2">
