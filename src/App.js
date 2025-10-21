@@ -1,35 +1,54 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// src/App.js
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import './App.css';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+// PAGES existantes
 import Accueil from './pages/Accueil';
-import Autisme from './pages/Autisme';
 import Actualite from './pages/Actualite';
-import ContactPage from './pages/ContactPage';
-import JulienPage from './pages/JulienPage';
-import Don from './pages/Don';
-import MbjPage from './pages/MbjPage';
 import Adherer from './pages/Adherer';
+import Autisme from './pages/Autisme';
+import ContactPage from './pages/ContactPage';
+import Don from './pages/Don';
 import DonSuccess from './pages/DonSuccess';
+import JulienPage from './pages/JulienPage';
+import MbjPage from './pages/MbjPage';
+import Boutique from './pages/Boutique';
+
+// NOUVELLE page détail WP
+import PostDetail from './pages/PostDetail';
 
 function App() {
   return (
-    <Router>
-      <div>
+    <BrowserRouter>
+      <div className="min-h-screen flex flex-col">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Accueil />} />
-          <Route path="/autisme" element={<Autisme />} />
-          <Route path="/actualite" element={<Actualite />} />
-          <Route path="/don" element={<Don />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/julien" element={<JulienPage />} />
-          <Route path="/mbj" element={<MbjPage />} />
-          <Route path="/adherer" element={<Adherer />} />
-          <Route path="/don-success" element={<DonSuccess />} />
-        </Routes>
+
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Accueil />} />
+            <Route path="/actualite" element={<Actualite />} />
+            <Route path="/actualite/:slug" element={<PostDetail />} />
+            <Route path="/adherer" element={<Adherer />} />
+            <Route path="/autisme" element={<Autisme />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/don" element={<Don />} />
+            <Route path="/don-success" element={<DonSuccess />} />
+            <Route path="/mbj" element={<MbjPage />} />
+            <Route path="/julien" element={<JulienPage />} />
+            <Route path="/boutique" element={<Boutique />} />
+            <Route path="*" element={<div className="container mx-auto px-4 py-12">Page non trouvée.</div>} />
+          </Routes>
+        </main>
+
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

@@ -8,6 +8,7 @@ const navigation = [
   { name: 'Accueil', href: '/' },
   { name: 'Autisme', href: '/autisme' },
   { name: 'Actualité', href: '/actualite' },
+  { name: 'Boutique', href: '/boutique' }, // ← Nouvelle ligne
   { name: 'Nos projets', href: '/mbj' },
   { name: 'Don', href: '/don' },
   { name: 'Contact', href: '/contact' },
