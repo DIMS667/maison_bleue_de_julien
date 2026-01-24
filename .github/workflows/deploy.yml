@@ -33,4 +33,4 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftp
         local-dir: ./build/
-        server-dir: public_html/  # ou le sous-dossier selon ton site
+        server-dir: public_html/ 
