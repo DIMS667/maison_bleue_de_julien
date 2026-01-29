@@ -96,8 +96,8 @@ const EnhancedFooter = () => {
                 
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="w-5 h-5 text-cyan-300 flex-shrink-0" />
-                  <a href="mailto:contact@maisonbleue.cm" className="text-cyan-200 hover:text-white transition-colors duration-300">
-                    jeannetonye@maisonbleudejulien.org
+                  <a href="mailto:jeannekiboum@lamaisonbleuedejulien.org" className="text-cyan-200 hover:text-white transition-colors duration-300">
+                    jeannekiboum@lamaisonbleuedejulien.org
                   </a>
                 </div>
               </div>

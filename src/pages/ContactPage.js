@@ -99,8 +99,8 @@ Message : ${message}`;
             </div>
             <h3 className="text-xl font-bold text-cyan-700 text-center mb-4">Email</h3>
             <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-gray-900 break-words">contact@maisonbleudejulien.org</p>
-              <p className="text-sm font-medium text-gray-900 break-words">jeannetonye@maisonbleudejulien.org</p>
+              <p className="text-sm font-medium text-gray-900 break-words">contact@lamaisonbleuedejulien.org</p>
+              <p className="text-sm font-medium text-gray-900 break-words">jeannekiboum@lamaisonbleuedejulien.org</p>
             </div>
           </div>
 
