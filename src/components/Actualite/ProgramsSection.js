@@ -1,3 +1,4 @@
+//ProgramsSection.js
 import React, { useState, useEffect } from "react";
 import { Calendar, Star, ArrowRight, Award, Filter, X, Tag, Heart, Gift, MapPin, Users, ChevronLeft, ChevronRight, Play, Pause, ZoomIn, Quote } from 'lucide-react';
 

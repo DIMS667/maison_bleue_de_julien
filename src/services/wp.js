@@ -1,7 +1,7 @@
 // src/services/wp.js
 // Mini SDK pour l’API WordPress (headless)
 
-const CMS_BASE = 'https://cms.maisonbleudejulien.org/wp-json/wp/v2';
+const CMS_BASE = 'https://cms.lamaisonbleuedejulien.org/wp-json/wp/v2';
 
 function toUrl(path) {
   return new URL(path, CMS_BASE.replace('/wp-json/wp/v2', ''));

@@ -1,3 +1,4 @@
+//GallerySection.js
 import React, { useState } from "react";
 import { Camera, Play, Pause, ChevronLeft, ChevronRight, Share2, Heart } from 'lucide-react';
 
