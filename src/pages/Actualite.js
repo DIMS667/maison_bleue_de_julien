@@ -112,7 +112,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Calendar, Camera, Heart, Sparkles, Newspaper, ArrowRight } from 'lucide-react';
+import { Calendar, Camera, Heart, Sparkles, Newspaper } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import EnhancedProgramsSection from '../components/Actualite/ProgramsSection';
 import EnhancedGallerySection from '../components/Actualite/GallerySection';
