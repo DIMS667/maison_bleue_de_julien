@@ -1,7 +1,8 @@
 // src/services/wp.js
-// Mini SDK pour l’API WordPress (headless)
+// Mini SDK pour l'API WordPress (headless)
 
-const CMS_BASE = 'https://cms.lamaisonbleuedejulien.org/wp-json/wp/v2';
+// ⚠️ IMPORTANT : Utilise l'URL de ton WordPress installé dans /cms
+const CMS_BASE = 'https://lamaisonbleuedejulien.org/cms/wp-json/wp/v2';
 
 function toUrl(path) {
   return new URL(path, CMS_BASE.replace('/wp-json/wp/v2', ''));
@@ -62,7 +63,7 @@ export async function fetchPostBySlug(slug) {
   return arr[0] || null;
 }
 
-// ---- Helpers d’affichage ----
+// ---- Helpers d'affichage ----
 export function featuredImageUrl(post) {
   const media = post?._embedded?.['wp:featuredmedia']?.[0];
   return media?.source_url || null;
@@ -72,7 +73,7 @@ export function postDate(post) {
 }
 export function postDateLabel(post) {
   const d = postDate(post);
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: '2-digit' });
+  return d.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: '2-digit' });
 }
 export function wpSiteUrl() {
   return toUrl('/').toString();

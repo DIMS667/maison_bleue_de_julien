@@ -226,6 +226,9 @@ import { FaHeart, FaCalendarAlt, FaArrowRight, FaPalette, FaUsers, FaCampground,
 import { Link, useNavigate } from "react-router-dom";
 import { fetchPosts, featuredImageUrl, postDateLabel } from "../../services/wp";
 
+// NOTE: Assure-toi que wp.js utilise l'URL correcte:
+// const CMS_BASE = 'https://lamaisonbleuedejulien.org/cms/wp-json/wp/v2';
+
 // Image par défaut si un article n'a pas d'image
 import defaultImg from "../../assets/images/actu1.jpg";
 
