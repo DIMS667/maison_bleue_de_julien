@@ -223,7 +223,7 @@
 // src/components/Accueil/NewsCards.js
 "use client";
 import React, { useState, useEffect } from "react";
-import { FaHeart, FaCalendarAlt, FaArrowRight, FaPalette, FaUsers, FaCampground, FaNewspaper } from "react-icons/fa";
+import { FaHeart, FaCalendarAlt, FaPalette, FaUsers, FaCampground, FaNewspaper } from "react-icons/fa";
 import { fetchPosts, featuredImageUrl, postDateLabel } from "../../services/wp";
 
 // Image par défaut si un article n'a pas d'image
