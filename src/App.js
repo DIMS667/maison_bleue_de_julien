@@ -21,7 +21,7 @@ import MbjPage from './pages/MbjPage';
 import Boutique from './pages/Boutique';
 
 // NOUVELLE page détail WP
-// import PostDetail from './pages/PostDetail';
+import PostDetail from './pages/PostDetail';
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Accueil />} />
             <Route path="/actualite" element={<Actualite />} />
-            {/* <Route path="/actualite/" element={<PostDetail />} /> */}
+            <Route path="/actualite/" element={<PostDetail />} />
             <Route path="/adherer" element={<Adherer />} />
             <Route path="/autisme" element={<Autisme />} />
             <Route path="/contact" element={<ContactPage />} />

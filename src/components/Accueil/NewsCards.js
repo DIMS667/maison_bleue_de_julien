@@ -219,7 +219,7 @@
 // export default EnhancedNewsCards;
 
 
-
+//NewsCards.js
 "use client";
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaCalendarAlt, FaArrowRight, FaPalette, FaUsers, FaCampground, FaNewspaper } from "react-icons/fa";
