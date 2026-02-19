@@ -1,365 +1,76 @@
-// //NewsCards.js
-// "use client";
-// import act1 from "../../assets/images/actu1.jpg";
-// import act2 from "../../assets/images/actu2.jpg";
-// import act3 from "../../assets/images/actu3.jpg";
-// import act4 from "../../assets/images/actu4.jpg";
-// import act5 from "../../assets/images/actu5.jpg";
-// import act7 from "../../assets/images/actu7.jpg";
-// import React, { useState, useEffect } from "react";
-// import { FaHeart, FaCalendarAlt, FaArrowRight, FaPalette, FaUsers, FaCampground } from "react-icons/fa";
-// import { Link } from "react-router-dom";
+// src/components/Accueil/NewsCards.js
+// Nettoyé : plus aucune dépendance WordPress
 
-// const newsData = [
-//   {
-//     id: 1,
-//     image: act1,
-//     title: "Sensibilisation à l'autisme",
-//     description: "Une initiative visant à informer et sensibiliser le public sur l'autisme, en favorisant une meilleure compréhension et inclusion des personnes autistes.",
-//     category: "Sensibilisation",
-//     icon: FaUsers,
-//     color: "blue"
-//   },
-//   {
-//     id: 2,
-//     image: act2,
-//     title: "Autisme et fratrie",
-//     description: "Un programme dédié aux frères et sœurs d'enfants autistes, les aidant à mieux comprendre l'autisme et à renforcer les liens familiaux.",
-//     category: "Famille",
-//     icon: FaHeart,
-//     color: "red"
-//   },
-//   {
-//     id: 3,
-//     image: act3,
-//     title: "Atelier créatif pour enfants autistes",
-//     description: "Un espace d'expression artistique conçu pour stimuler la créativité et le développement sensoriel des enfants autistes à travers diverses activités manuelles.",
-//     category: "Créativité",
-//     icon: FaPalette,
-//     color: "cyan"
-//   },
-//   {
-//     id: 4,
-//     image: act4,
-//     title: "Camp de vacances",
-//     description: "Un séjour ludique et éducatif offrant aux enfants autistes des activités adaptées, favorisant l'épanouissement personnel et les interactions sociales.",
-//     category: "Vacances",
-//     icon: FaCampground,
-//     color: "blue"
-//   },
-//   {
-//     id: 5,
-//     image: act5,
-//     title: "Atelier de poterie",
-//     description: "Un atelier pratique permettant aux enfants autistes d'explorer la poterie comme moyen d'expression et de développement sensoriel.",
-//     category: "Atelier",
-//     icon: FaPalette,
-//     color: "cyan"
-//   },
-//   {
-//     id: 6,
-//     image: act7,
-//     title: "Salon International de la Santé au Cameroun",
-//     description: "Du 22 au 26 juillet 2024, la Maison Bleue de Julien participera au Salon International de la Santé au Cameroun.",
-//     category: "Événement",
-//     icon: FaCalendarAlt,
-//     color: "blue"
-//   },
-// ];
-
-// const EnhancedNewsCards = () => {
-//   const [displayCount, setDisplayCount] = useState(3);
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       if (window.innerWidth >= 1024) {
-//         setDisplayCount(6);
-//       } else if (window.innerWidth >= 640) {
-//         setDisplayCount(6);
-//       } else {
-//         setDisplayCount(3);
-//       }
-//     };
-
-//     handleResize();
-//     window.addEventListener("resize", handleResize);
-
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   const getColorClasses = (color) => {
-//     switch (color) {
-//       case 'red':
-//         return {
-//           badge: 'bg-red-100 text-red-800 border-red-200',
-//           icon: 'from-red-500 to-pink-500',
-//           hover: 'group-hover:from-red-400 group-hover:to-pink-400'
-//         };
-//       case 'cyan':
-//         return {
-//           badge: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-//           icon: 'from-cyan-500 to-blue-500',
-//           hover: 'group-hover:from-cyan-400 group-hover:to-blue-400'
-//         };
-//       default:
-//         return {
-//           badge: 'bg-blue-100 text-blue-800 border-blue-200',
-//           icon: 'from-blue-500 to-cyan-500',
-//           hover: 'group-hover:from-blue-400 group-hover:to-cyan-400'
-//         };
-//     }
-//   };
-
-//   return (
-//     <div className="relative w-full px-4 sm:px-6 py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden">
-      
-//       {/* Éléments décoratifs de fond */}
-//       <div className="absolute inset-0 opacity-5">
-//         <div className="absolute top-20 left-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
-//         <div className="absolute bottom-20 right-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
-//         <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300 rounded-full blur-2xl"></div>
-//       </div>
-
-//       <div className="relative z-10 max-w-7xl mx-auto">
-        
-//         {/* En-tête de section */}
-//         <div className="text-center mb-16">
-//           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 mb-6">
-//             <FaCalendarAlt className="w-4 h-4 text-blue-600 mr-2" />
-//             <span className="text-sm font-semibold text-blue-800">Nos dernières nouvelles</span>
-//           </div>
-          
-//           <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent mb-4">
-//             Dernières Actualités
-//           </h2>
-          
-//           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mx-auto mb-6"></div>
-          
-//           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-//             Découvrez les dernières initiatives et événements de la Maison Bleue de Julien pour l'inclusion et l'épanouissement des personnes autistes.
-//           </p>
-//         </div>
-
-//         {/* Grille des actualités */}
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-//           {newsData.slice(0, displayCount).map((news) => {
-//             const colorClasses = getColorClasses(news.color);
-//             const IconComponent = news.icon;
-            
-//             return (
-//               <div key={news.id} className="group relative">
-//                 {/* Effet de fond animé */}
-//                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
-                
-//                 {/* Card principale */}
-//                 <div className="relative bg-white rounded-2xl p-6 shadow-xl border border-blue-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
-                  
-//                   {/* Badge catégorie */}
-//                   <div className="flex items-center justify-between mb-4">
-//                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${colorClasses.badge}`}>
-//                       {news.category}
-//                     </span>
-//                     <div className={`w-10 h-10 bg-gradient-to-br ${colorClasses.icon} ${colorClasses.hover} rounded-full flex items-center justify-center transition-all duration-300`}>
-//                       <IconComponent className="w-5 h-5 text-white" />
-//                     </div>
-//                   </div>
-
-//                   {/* Image avec vos vraies images */}
-//                   <div className="relative mb-6 overflow-hidden rounded-xl">
-//                     <img 
-//                       src={news.image} 
-//                       alt={news.title} 
-//                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" 
-//                     />
-//                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-//                   </div>
-
-//                   {/* Contenu */}
-//                   <div className="flex-1 flex flex-col">
-//                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-//                       {news.title}
-//                     </h3>
-                    
-//                     <p className="text-gray-600 leading-relaxed flex-1 text-sm mb-4">
-//                       {news.description}
-//                     </p>
-
-//                     {/* Footer simplifié */}
-//                     <div className="flex items-center justify-center pt-4 border-t border-gray-100">
-//                       <div className="flex items-center space-x-2">
-//                         <FaHeart className="w-4 h-4 text-red-400" />
-//                         <span className="text-sm text-gray-600 font-medium">Maison Bleue de Julien</span>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             );
-//           })}
-//         </div>
-
-//         {/* Bouton "Plus d'actualités" */}
-//         <div className="text-center">
-//           <div className="relative group inline-block">
-//             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
-//             <Link
-//               to="/actualite"
-//               className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3"
-//             >
-//               <span>Plus d'actualités</span>
-//               <FaArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default EnhancedNewsCards;
-
-
-
-"use client";
-import React, { useState, useEffect } from "react";
-import { FaHeart, FaCalendarAlt, FaArrowRight, FaPalette, FaUsers, FaCampground, FaNewspaper } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { fetchPosts, featuredImageUrl, postDateLabel } from "../../services/wp";
-
-// Image par défaut si un article n'a pas d'image
-import defaultImg from "../../assets/images/actu1.jpg";
+import React, { useState, useEffect } from 'react';
+import { FaCalendarAlt, FaArrowRight } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetchArticles } from '../../services/api';
+import PostCard from '../Actualite/PostCard';
 
 const EnhancedNewsCards = () => {
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [displayCount, setDisplayCount] = useState(3);
 
-  // Charger les posts WordPress au montage du composant
   useEffect(() => {
-    loadPosts();
+    loadArticles();
   }, []);
 
-  // Gérer le nombre d'articles affichés selon la taille d'écran
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setDisplayCount(6);
-      } else if (window.innerWidth >= 640) {
-        setDisplayCount(6);
-      } else {
-        setDisplayCount(3);
-      }
+      setDisplayCount(window.innerWidth < 640 ? 3 : 6);
     };
-
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const loadPosts = async () => {
+  const loadArticles = async () => {
     try {
       setLoading(true);
-      // Récupérer les 6 derniers articles
-      const { items } = await fetchPosts({ perPage: 6, page: 1 });
-      setPosts(items);
+      const { items } = await fetchArticles({ perPage: 6, page: 1 });
+      setArticles(items);
       setError(null);
     } catch (err) {
-      console.error('Erreur chargement posts:', err);
+      console.error('Erreur chargement articles:', err);
       setError("Impossible de charger les actualités");
     } finally {
       setLoading(false);
     }
   };
 
-  // const handlePostClick = (post) => {
-  //   navigate(`/actualites/${post.slug}`);
-  // };
-
-  // Mapper les catégories WordPress aux icônes et couleurs
-  const getCategoryStyle = (post) => {
-    // Récupérer la première catégorie du post
-    const category = post._embedded?.['wp:term']?.[0]?.[0];
-    const categoryName = category?.name?.toLowerCase() || 'actualité';
-
-    // Mapping des catégories vers icônes et couleurs
-    if (categoryName.includes('sensibilisation') || categoryName.includes('social')) {
-      return {
-        icon: FaUsers,
-        color: 'blue',
-        badge: 'bg-blue-100 text-blue-800 border-blue-200',
-        iconGradient: 'from-blue-500 to-cyan-500',
-        hover: 'group-hover:from-blue-400 group-hover:to-cyan-400'
-      };
-    }
-    if (categoryName.includes('famille') || categoryName.includes('parent')) {
-      return {
-        icon: FaHeart,
-        color: 'red',
-        badge: 'bg-red-100 text-red-800 border-red-200',
-        iconGradient: 'from-red-500 to-pink-500',
-        hover: 'group-hover:from-red-400 group-hover:to-pink-400'
-      };
-    }
-    if (categoryName.includes('créat') || categoryName.includes('art') || categoryName.includes('atelier')) {
-      return {
-        icon: FaPalette,
-        color: 'cyan',
-        badge: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-        iconGradient: 'from-cyan-500 to-blue-500',
-        hover: 'group-hover:from-cyan-400 group-hover:to-blue-400'
-      };
-    }
-    if (categoryName.includes('camp') || categoryName.includes('vacances')) {
-      return {
-        icon: FaCampground,
-        color: 'blue',
-        badge: 'bg-blue-100 text-blue-800 border-blue-200',
-        iconGradient: 'from-blue-500 to-cyan-500',
-        hover: 'group-hover:from-blue-400 group-hover:to-cyan-400'
-      };
-    }
-    if (categoryName.includes('événement') || categoryName.includes('evenement')) {
-      return {
-        icon: FaCalendarAlt,
-        color: 'blue',
-        badge: 'bg-blue-100 text-blue-800 border-blue-200',
-        iconGradient: 'from-blue-500 to-cyan-500',
-        hover: 'group-hover:from-blue-400 group-hover:to-cyan-400'
-      };
-    }
-    
-    // Par défaut
-    return {
-      icon: FaNewspaper,
-      color: 'blue',
-      badge: 'bg-blue-100 text-blue-800 border-blue-200',
-      iconGradient: 'from-blue-500 to-cyan-500',
-      hover: 'group-hover:from-blue-400 group-hover:to-cyan-400'
-    };
+  const handleArticleClick = (article) => {
+    navigate(`/actualites/${article.slug}`);
   };
 
-  const getExcerpt = (post) => {
-    const div = document.createElement('div');
-    div.innerHTML = post.excerpt?.rendered || '';
-    const text = div.textContent || div.innerText || '';
-    return text.length > 150 ? text.substring(0, 150) + '...' : text;
-  };
+  // ---- États de chargement / erreur / vide ----
+
+  const SectionHeader = () => (
+    <div className="text-center mb-16">
+      <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 mb-6">
+        <FaCalendarAlt className="w-4 h-4 text-blue-600 mr-2" />
+        <span className="text-sm font-semibold text-blue-800">Nos dernières nouvelles</span>
+      </div>
+      <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent mb-4">
+        Dernières Actualités
+      </h2>
+      <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mx-auto mb-6" />
+      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        Découvrez les dernières initiatives et événements de la Maison Bleue de Julien
+        pour l'inclusion et l'épanouissement des personnes autistes.
+      </p>
+    </div>
+  );
 
   if (loading) {
     return (
       <div className="relative w-full px-4 sm:px-6 py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 mb-6">
-            <FaCalendarAlt className="w-4 h-4 text-blue-600 mr-2" />
-            <span className="text-sm font-semibold text-blue-800">Nos dernières nouvelles</span>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent mb-8">
-            Dernières Actualités
-          </h2>
+        <div className="max-w-7xl mx-auto">
+          <SectionHeader />
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" />
           </div>
         </div>
       </div>
@@ -370,16 +81,10 @@ const EnhancedNewsCards = () => {
     return (
       <div className="relative w-full px-4 sm:px-6 py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 mb-6">
-            <FaCalendarAlt className="w-4 h-4 text-blue-600 mr-2" />
-            <span className="text-sm font-semibold text-blue-800">Nos dernières nouvelles</span>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent mb-8">
-            Dernières Actualités
-          </h2>
-          <div className="text-red-600 mb-4">{error}</div>
+          <SectionHeader />
+          <p className="text-red-600 mb-4">{error}</p>
           <button
-            onClick={loadPosts}
+            onClick={loadArticles}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
             Réessayer
@@ -389,17 +94,11 @@ const EnhancedNewsCards = () => {
     );
   }
 
-  if (posts.length === 0) {
+  if (articles.length === 0) {
     return (
       <div className="relative w-full px-4 sm:px-6 py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 mb-6">
-            <FaCalendarAlt className="w-4 h-4 text-blue-600 mr-2" />
-            <span className="text-sm font-semibold text-blue-800">Nos dernières nouvelles</span>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent mb-8">
-            Dernières Actualités
-          </h2>
+          <SectionHeader />
           <p className="text-gray-600">Aucune actualité pour le moment. Revenez bientôt !</p>
         </div>
       </div>
@@ -408,107 +107,32 @@ const EnhancedNewsCards = () => {
 
   return (
     <div className="relative w-full px-4 sm:px-6 py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden">
-      
-      {/* Éléments décoratifs de fond */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300 rounded-full blur-2xl"></div>
+
+      {/* Éléments décoratifs */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="absolute top-20 left-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-300 rounded-full blur-2xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        
-        {/* En-tête de section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 mb-6">
-            <FaCalendarAlt className="w-4 h-4 text-blue-600 mr-2" />
-            <span className="text-sm font-semibold text-blue-800">Nos dernières nouvelles</span>
-          </div>
-          
-          <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent mb-4">
-            Dernières Actualités
-          </h2>
-          
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mx-auto mb-6"></div>
-          
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Découvrez les dernières initiatives et événements de la Maison Bleue de Julien pour l'inclusion et l'épanouissement des personnes autistes.
-          </p>
-        </div>
+        <SectionHeader />
 
-        {/* Grille des actualités */}
+        {/* Grille des articles */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {posts.slice(0, displayCount).map((post) => {
-            const categoryStyle = getCategoryStyle(post);
-            const IconComponent = categoryStyle.icon;
-            const featuredImg = featuredImageUrl(post) || defaultImg;
-            const excerpt = getExcerpt(post);
-            const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Actualité';
-            
-            return (
-              <div 
-                key={post.id} 
-                className="group relative cursor-pointer"
-                // onClick={() => handlePostClick(post)}
-              >
-                {/* Effet de fond animé */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
-                
-                {/* Card principale */}
-                <div className="relative bg-white rounded-2xl p-6 shadow-xl border border-blue-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
-                  
-                  {/* Badge catégorie */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${categoryStyle.badge}`}>
-                      {category}
-                    </span>
-                    <div className={`w-10 h-10 bg-gradient-to-br ${categoryStyle.iconGradient} ${categoryStyle.hover} rounded-full flex items-center justify-center transition-all duration-300`}>
-                      <IconComponent className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Image WordPress */}
-                  <div className="relative mb-6 overflow-hidden rounded-xl">
-                    <img 
-                      src={featuredImg} 
-                      alt={post.title?.rendered || ''} 
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-
-                  {/* Contenu */}
-                  <div className="flex-1 flex flex-col">
-                    <h3 
-                      className="text-xl font-bold text-gray-900 mb-3 line-clamp-2"
-                      dangerouslySetInnerHTML={{ __html: post.title?.rendered || '' }}
-                    />
-                    
-                    <p className="text-gray-600 leading-relaxed flex-1 text-sm mb-4 line-clamp-3">
-                      {excerpt}
-                    </p>
-
-                    {/* Footer avec date */}
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center space-x-2">
-                        <FaHeart className="w-4 h-4 text-red-400" />
-                        <span className="text-sm text-gray-600 font-medium">Maison Bleue de Julien</span>
-                      </div>
-                      <span className="text-xs text-gray-500">
-                        {postDateLabel(post)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {articles.slice(0, displayCount).map((article) => (
+            <PostCard
+              key={article.id}
+              article={article}
+              onClick={handleArticleClick}
+            />
+          ))}
         </div>
 
         {/* Bouton "Plus d'actualités" */}
         <div className="text-center">
           <div className="relative group inline-block">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300" />
             <Link
               to="/actualite"
               className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3"
