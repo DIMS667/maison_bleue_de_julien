@@ -1,12 +1,9 @@
 // src/components/Actualite/PostCard.js
-// Remplace WPPostCard.js — consomme l'API FastAPI
 
 import React from 'react';
 import { FaCalendarAlt, FaHeart, FaUsers, FaPalette, FaCampground, FaNewspaper } from 'react-icons/fa';
 import { articleImageUrl, articleDateLabel } from '../../services/api';
-import defaultImg from '../../assets/images/actu1.jpg';
 
-// Mapping catégorie → style visuel
 function getCategoryStyle(categoryName = '') {
   const name = categoryName.toLowerCase();
 
@@ -54,11 +51,10 @@ function getCategoryStyle(categoryName = '') {
 export default function PostCard({ article, onClick }) {
   const style = getCategoryStyle(article?.category?.name);
   const IconComponent = style.icon;
-  const imgSrc = articleImageUrl(article) || defaultImg;
+  const imgSrc = articleImageUrl(article); // plus de fallback
   const dateLabel = articleDateLabel(article);
   const categoryName = article?.category?.name || 'Actualité';
 
-  // Extrait texte brut depuis le contenu HTML
   const getExcerpt = () => {
     if (article?.excerpt) return article.excerpt;
     if (!article?.content) return '';
@@ -73,10 +69,8 @@ export default function PostCard({ article, onClick }) {
       className="group relative cursor-pointer"
       onClick={() => onClick?.(article)}
     >
-      {/* Halo gradient animé */}
       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500" />
 
-      {/* Carte */}
       <div className="relative bg-white rounded-2xl p-6 shadow-xl border border-blue-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
 
         {/* Badge catégorie + icône */}
@@ -89,16 +83,18 @@ export default function PostCard({ article, onClick }) {
           </div>
         </div>
 
-        {/* Image */}
-        <div className="relative mb-6 overflow-hidden rounded-xl">
-          <img
-            src={imgSrc}
-            alt={article?.title || ''}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
+        {/* Image — affichée seulement si elle existe */}
+        {imgSrc && (
+          <div className="relative mb-6 overflow-hidden rounded-xl">
+            <img
+              src={imgSrc}
+              alt={article?.title || ''}
+              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        )}
 
         {/* Contenu */}
         <div className="flex-1 flex flex-col">

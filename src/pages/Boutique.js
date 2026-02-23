@@ -7,7 +7,6 @@ import {
   ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { fetchBoutiqueItems, fetchCategories, articleImageUrl } from '../services/api';
-import defaultImg from '../assets/images/actu1.jpg';
 
 // ── Constantes ───────────────────────────────────────────────────────────────
 const CATEGORIES_ICONES = {
@@ -19,9 +18,9 @@ const CATEGORIES_ICONES = {
 };
 const PER_PAGE = 9;
 
-// ── Carte produit (inchangée visuellement) ───────────────────────────────────
+// ── Carte produit ────────────────────────────────────────────────────────────
 const ProductCard = ({ product }) => {
-  const imgSrc = articleImageUrl(product) || defaultImg;
+  const imgSrc = articleImageUrl(product); // plus de fallback
 
   return (
     <div className="group relative bg-white rounded-3xl p-6 shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
@@ -45,20 +44,22 @@ const ProductCard = ({ product }) => {
         </div>
       )}
 
-      {/* Image */}
-      <div className="relative mb-6 overflow-hidden rounded-2xl">
-        <img
-          src={imgSrc}
-          alt={product.name}
-          className="w-full aspect-square object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <button className="bg-white/90 text-blue-600 p-3 rounded-full shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
-            <Eye className="w-6 h-6" />
-          </button>
+      {/* Image — affichée seulement si elle existe */}
+      {imgSrc && (
+        <div className="relative mb-6 overflow-hidden rounded-2xl">
+          <img
+            src={imgSrc}
+            alt={product.name}
+            className="w-full aspect-square object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <button className="bg-white/90 text-blue-600 p-3 rounded-full shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+              <Eye className="w-6 h-6" />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Infos */}
       <div className="space-y-4">
@@ -91,26 +92,24 @@ const ProductCard = ({ product }) => {
 
 // ── Page Boutique ────────────────────────────────────────────────────────────
 const Boutique = () => {
-  const [products, setProducts]               = useState([]);
-  const [categories, setCategories]           = useState([]);
+  const [products, setProducts]                 = useState([]);
+  const [categories, setCategories]             = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('tous');
-  const [viewMode, setViewMode]               = useState('grid');
-  const [searchInput, setSearchInput]         = useState('');
-  const [search, setSearch]                   = useState('');
-  const [page, setPage]                       = useState(1);
-  const [totalPages, setTotalPages]           = useState(1);
-  const [total, setTotal]                     = useState(0);
-  const [loading, setLoading]                 = useState(true);
-  const [error, setError]                     = useState(null);
+  const [viewMode, setViewMode]                 = useState('grid');
+  const [searchInput, setSearchInput]           = useState('');
+  const [search, setSearch]                     = useState('');
+  const [page, setPage]                         = useState(1);
+  const [totalPages, setTotalPages]             = useState(1);
+  const [total, setTotal]                       = useState(0);
+  const [loading, setLoading]                   = useState(true);
+  const [error, setError]                       = useState(null);
 
-  // Charger les catégories au montage
   useEffect(() => {
     fetchCategories('boutique')
       .then((cats) => setCategories(cats))
       .catch(() => {});
   }, []);
 
-  // Charger les produits à chaque changement de filtre / page
   const loadProducts = useCallback(async () => {
     try {
       setLoading(true);
@@ -147,7 +146,6 @@ const Boutique = () => {
     setPage(1);
   };
 
-  // Catégories : "Tous" + celles venant de l'API
   const allCategories = [
     { id: 'tous', name: 'Tous les produits', icon: ShoppingBag },
     ...categories.map((cat) => ({
@@ -167,7 +165,6 @@ const Boutique = () => {
           <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl animate-pulse delay-1000" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-red-300 rounded-full blur-2xl animate-pulse delay-500" />
         </div>
-
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 mb-8">
             <ShoppingBag className="w-6 h-6 mr-3" />
@@ -187,8 +184,6 @@ const Boutique = () => {
         {/* Filtres */}
         <div className="mb-12">
           <div className="bg-white rounded-3xl p-6 shadow-xl border border-blue-100">
-
-            {/* Recherche */}
             <form onSubmit={handleSearch} className="mb-6">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -202,7 +197,6 @@ const Boutique = () => {
               </div>
             </form>
 
-            {/* Catégories */}
             <div className="flex flex-wrap gap-3 mb-6">
               {allCategories.map((category) => {
                 const IconComponent = category.icon;
@@ -223,7 +217,6 @@ const Boutique = () => {
               })}
             </div>
 
-            {/* Compteur + vue */}
             <div className="flex items-center justify-between">
               <p className="text-gray-600">
                 <span className="font-semibold text-blue-600">{total}</span> produit(s) trouvé(s)
@@ -278,7 +271,6 @@ const Boutique = () => {
               ))}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-4 mt-12">
                 <button

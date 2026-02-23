@@ -1,8 +1,8 @@
 // src/services/api.js
 // Client API pour le backend FastAPI — 3 rubriques : actualités, publications, boutique
 
-const API_BASE = process.env.REACT_APP_API_URL || 'https://api.lamaisonbleuedejulien.org';
-
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+console.log('API BASE:', process.env.REACT_APP_API_URL);
 async function apiFetch(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
     headers: { 'Content-Type': 'application/json' },

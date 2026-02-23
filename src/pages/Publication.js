@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { BookOpen, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { FaCalendarAlt, FaHeart, FaNewspaper } from 'react-icons/fa';
 import { fetchPublications, articleImageUrl, articleDateLabel } from '../services/api';
-import defaultImg from '../assets/images/actu1.jpg';
 
 // ── Carte publication ────────────────────────────────────────────────────────
 function PublicationCard({ publication, onClick }) {
-  const imgSrc = articleImageUrl(publication) || defaultImg;
+  const imgSrc = articleImageUrl(publication); // plus de fallback
   const dateLabel = articleDateLabel(publication);
   const categoryName = publication?.category?.name || 'Publication';
 
@@ -28,10 +27,8 @@ function PublicationCard({ publication, onClick }) {
       className="group relative cursor-pointer"
       onClick={() => onClick?.(publication)}
     >
-      {/* Halo */}
       <div className="absolute -inset-2 bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-700 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500" />
 
-      {/* Carte */}
       <div className="relative bg-white rounded-2xl p-6 shadow-xl border border-indigo-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
 
         {/* Badge catégorie + icône */}
@@ -44,16 +41,18 @@ function PublicationCard({ publication, onClick }) {
           </div>
         </div>
 
-        {/* Image */}
-        <div className="relative mb-6 overflow-hidden rounded-xl">
-          <img
-            src={imgSrc}
-            alt={publication?.title || ''}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
+        {/* Image — affichée seulement si elle existe */}
+        {imgSrc && (
+          <div className="relative mb-6 overflow-hidden rounded-xl">
+            <img
+              src={imgSrc}
+              alt={publication?.title || ''}
+              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        )}
 
         {/* Contenu */}
         <div className="flex-1 flex flex-col">
@@ -208,14 +207,12 @@ const PublicationPage = () => {
           </div>
         ) : (
           <>
-            {/* Grille */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {publications.map((pub) => (
                 <PublicationCard key={pub.id} publication={pub} onClick={handleClick} />
               ))}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-4">
                 <button
@@ -226,11 +223,9 @@ const PublicationPage = () => {
                   <ChevronLeft className="w-4 h-4" />
                   Précédent
                 </button>
-
                 <span className="text-sm text-gray-600 font-medium">
                   Page {page} / {totalPages}
                 </span>
-
                 <button
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
