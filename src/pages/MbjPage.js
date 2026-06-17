@@ -287,7 +287,8 @@ const EnhancedMbjPage = () => {
                 {[
                   { year: "2020-2022", title: "Rapport annuel MBJ 2020-2022", file: "/pdf/RAPPORT-ANNUEL-FINAL-MBJ-202O-2021-2022.pdf" },
                   { year: "2023", title: "Rapport annuel MBJ 2023", file: "/pdf/La-Maiso- Bleue-de-Julien-Rapport-annuel-2023-v2.pdf" },
-                  { year: "2024", title: "Rapport annuel MBJ 2024", file: "/pdf/Rapport annuel MBJ 2024.pdf" }
+                  { year: "2024", title: "Rapport annuel MBJ 2024", file: "/pdf/Rapport annuel MBJ 2024.pdf" },
+                  { year: "2025", title: "Rapport annuel MBJ 2025", file: "/pdf/RAPPORT ANNUEL 2025_MBJ.pdf" }
                 ].map((report, index) => (
                   <div key={index} className={`grid grid-cols-3 gap-4 px-6 py-4 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-blue-50 transition-colors duration-200`}>
                     <div className="text-sm font-medium text-gray-900">{report.year}</div>
