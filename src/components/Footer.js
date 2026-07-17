@@ -1,181 +1,144 @@
 import React from 'react';
-import { FaHeart, FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebookF, FaInstagram, FaYoutube, FaTiktok, FaArrowUp } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
+import logo from '../assets/images/maison_bleu.jpg';
 
-const EnhancedFooter = () => {
+const associationLinks = [
+  { name: 'Qui sommes-nous ?', href: '/mbj' },
+  { name: 'Qui est Julien ?', href: '/julien' },
+  { name: 'Comprendre l’autisme', href: '/autisme' },
+  { name: 'Nous contacter', href: '/contact' },
+];
+
+const resourceLinks = [
+  { name: 'Actualités', href: '/actualite' },
+  { name: 'Publications', href: '/publications' },
+  { name: 'Boutique solidaire', href: '/boutique' },
+  { name: 'Adhérer', href: '/adherer' },
+  { name: 'Faire un don', href: '/don' },
+];
+
+const socialLinks = [
+  {
+    name: 'Facebook',
+    href: 'https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien',
+    icon: FaFacebookF,
+  },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw==',
+    icon: FaInstagram,
+  },
+  { name: 'YouTube', href: 'https://youtube.com', icon: FaYoutube },
+  {
+    name: 'TikTok',
+    href: 'https://www.tiktok.com/@lambj_julien?_t=ZM-8tIvC8b8qVZ&_r=1',
+    icon: FaTiktok,
+  },
+];
+
+function FooterNav({ title, links }) {
+  return (
+    <nav aria-label={title}>
+      <h2 className="footer-heading">{title}</h2>
+      <ul className="mt-4 space-y-2.5">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link to={link.href} className="footer-link">
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+export default function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-600 text-white overflow-hidden">
-      
-      {/* Éléments décoratifs de fond */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-red-300 rounded-full blur-2xl"></div>
+    <footer className="site-footer">
+      <div className="site-container grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_1.15fr] lg:py-14">
+        <div>
+          <Link to="/" className="inline-flex items-center gap-3">
+            <span className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg bg-white p-1">
+              <img src={logo} alt="" className="h-full w-full object-contain" />
+            </span>
+            <span>
+              <span className="block text-lg font-extrabold leading-tight text-white">
+                La Maison Bleue
+              </span>
+              <span className="block text-sm font-semibold text-sky-200">de Julien</span>
+            </span>
+          </Link>
+          <p className="mt-5 max-w-sm text-sm leading-6 text-slate-300">
+            Une association engagée dans l’accompagnement des personnes autistes,
+            le soutien aux familles et la sensibilisation du public.
+          </p>
+          <div className="mt-5 flex gap-2" aria-label="Réseaux sociaux">
+            {socialLinks.map(({ name, href, icon: Icon }) => (
+              <a
+                key={name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Suivre La Maison Bleue de Julien sur ${name}`}
+                className="footer-social-link"
+              >
+                <Icon className="h-4 w-4" aria-hidden="true" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <FooterNav title="L’association" links={associationLinks} />
+        <FooterNav title="Liens utiles" links={resourceLinks} />
+
+        <div>
+          <h2 className="footer-heading">Coordonnées</h2>
+          <address className="mt-4 space-y-3.5 not-italic text-sm text-slate-300">
+            <p className="flex gap-3">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
+              <span>Nkoabang, Yaoundé, Cameroun</span>
+            </p>
+            <a href="tel:+237699893838" className="footer-contact-link">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
+              <span>+237 699 893 838</span>
+            </a>
+            <a href="tel:+237675953123" className="footer-contact-link">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
+              <span>+237 675 953 123</span>
+            </a>
+            <a
+              href="mailto:contact@lamaisonbleuedejulien.org"
+              className="footer-contact-link min-w-0"
+            >
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
+              <span className="break-words">contact@lamaisonbleuedejulien.org</span>
+            </a>
+          </address>
+        </div>
       </div>
 
-      <div className="relative z-10">
-        
-        {/* Section principale */}
-        <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            {/* Logo et description */}
-            <div className="lg:col-span-2">
-              <div className="mb-6">
-                {/* Logo stylisé */}
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-pink-400 rounded-full flex items-center justify-center">
-                    <FaHeart className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold">La Maison Bleue</h3>
-                    <p className="text-cyan-200 text-sm">de Julien</p>
-                  </div>
-                </div>
-                <p className="text-cyan-100 leading-relaxed mb-6 max-w-md">
-                  Notre association accompagne avec bienveillance les personnes autistes et leurs familles, 
-                  en créant un espace inclusif et chaleureux où chacun peut s'épanouir.
-                </p>
-              </div>
-              
-              {/* Slogan */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                <p className="text-lg font-medium text-cyan-200 italic">
-                  "Autisme : Vivre la différence"
-                </p>
-              </div>
-            </div>
-
-            {/* Liens rapides */}
-            <div>
-              <h4 className="text-lg font-semibold mb-6 text-white">Liens rapides</h4>
-              <ul className="space-y-3">
-                {[
-                  { name: 'Accueil', href: '/' },
-                  { name: 'Qui sommes-nous ?', href: '/mbj' },
-                  { name: 'Comprendre l\'autisme', href: '/autisme' },
-                  { name: 'Actualités', href: '/actualite' },
-                  { name: 'Faire un don', href: '/don' },
-                  { name: 'Nous rejoindre', href: '/adherer' }
-                ].map((link) => (
-                  <li key={link.name}>
-                    <a 
-                      href={link.href}
-                      className="text-cyan-200 hover:text-white hover:translate-x-1 transition-all duration-300 flex items-center group"
-                    >
-                      <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 group-hover:bg-red-400 transition-colors duration-300"></span>
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="text-lg font-semibold mb-6 text-white">Contact</h4>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <FaMapMarkerAlt className="w-5 h-5 text-cyan-300 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-cyan-200 text-sm">
-                      Yaoundé, Cameroun
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <FaPhone className="w-5 h-5 text-cyan-300 flex-shrink-0" />
-                  <a href="tel:+237699893838" className="text-cyan-200 hover:text-white transition-colors duration-300">
-                    +237 6 99 89 38 38
-                  </a>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <FaEnvelope className="w-5 h-5 text-cyan-300 flex-shrink-0" />
-                  <a href="mailto:jeannekiboum@lamaisonbleuedejulien.org" className="text-cyan-200 hover:text-white transition-colors duration-300">
-                    jeannekiboum@lamaisonbleuedejulien.org
-                  </a>
-                </div>
-              </div>
-
-              {/* Réseaux sociaux */}
-              <div className="mt-8">
-                <h5 className="text-base font-medium mb-4 text-white">Suivez-nous</h5>
-                <div className="flex space-x-3">
-                  <a 
-                    href="https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-cyan-200 hover:text-white hover:bg-blue-600 transition-all duration-300 hover:scale-110"
-                  >
-                    <FaFacebookF className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href="https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw==" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-cyan-200 hover:text-white hover:bg-pink-600 transition-all duration-300 hover:scale-110"
-                  >
-                    <FaInstagram className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href="https://youtube.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-cyan-200 hover:text-white hover:bg-red-600 transition-all duration-300 hover:scale-110"
-                  >
-                    <FaYoutube className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href="https://www.tiktok.com/@lambj_julien?_t=ZM-8tIvC8b8qVZ&_r=1" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-cyan-200 hover:text-white hover:bg-gray-800 transition-all duration-300 hover:scale-110"
-                  >
-                    <FaTiktok className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="border-t border-white/10">
+        <div className="site-container flex min-h-16 items-center justify-between gap-4 py-3 text-xs text-slate-400 sm:text-sm">
+          <p>© {new Date().getFullYear()} La Maison Bleue de Julien. Tous droits réservés.</p>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="footer-top-button"
+            title="Retour en haut"
+          >
+            <span className="sr-only">Retour en haut</span>
+            <ArrowUp className="h-4 w-4" aria-hidden="true" />
+          </button>
         </div>
-
-        {/* Barre de copyright */}
-        <div className="border-t border-white/20 bg-black/20 backdrop-blur-sm">
-          <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row items-center justify-between">
-              
-              {/* Copyright */}
-              <div className="text-center sm:text-left mb-4 sm:mb-0">
-                <p className="text-cyan-200 text-sm">
-                  © {new Date().getFullYear()} La Maison Bleue de Julien. Tous droits réservés.
-                </p>
-                <p className="text-cyan-300 text-xs mt-1">
-                  Fait avec <FaHeart className="inline w-3 h-3 text-red-400 mx-1" /> pour l'inclusion et la bienveillance
-                </p>
-              </div>
-
-              {/* Bouton retour en haut */}
-              <button
-                onClick={scrollToTop}
-                className="group flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full border border-white/20 hover:border-white/40 text-cyan-200 hover:text-white transition-all duration-300"
-              >
-                <span className="text-sm">Retour en haut</span>
-                <FaArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Décoration finale */}
-        <div className="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600"></div>
       </div>
     </footer>
   );
-};
-
-export default EnhancedFooter;
+}

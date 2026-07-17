@@ -1,124 +1,86 @@
-// src/components/Actualite/PostCard.js
-
 import React from 'react';
-import { FaCalendarAlt, FaHeart, FaUsers, FaPalette, FaCampground, FaNewspaper } from 'react-icons/fa';
-import { articleImageUrl, articleDateLabel } from '../../services/api';
+import { ArrowRight, CalendarDays, Heart, Newspaper, Palette, Tent, Users } from 'lucide-react';
+import { articleDateLabel, articleImageUrl, extractExcerpt } from '../../services/api';
+import { cx } from '../DesignSystem';
 
 function getCategoryStyle(categoryName = '') {
   const name = categoryName.toLowerCase();
 
   if (name.includes('sensibilisation') || name.includes('social')) {
-    return {
-      icon: FaUsers,
-      badge: 'bg-blue-100 text-blue-800 border-blue-200',
-      iconGradient: 'from-blue-500 to-cyan-500',
-      hover: 'group-hover:from-blue-400 group-hover:to-cyan-400',
-    };
+    return { icon: Users, tone: 'text-blue-700 bg-blue-50 border-blue-100' };
   }
   if (name.includes('famille') || name.includes('parent')) {
-    return {
-      icon: FaHeart,
-      badge: 'bg-red-100 text-red-800 border-red-200',
-      iconGradient: 'from-red-500 to-pink-500',
-      hover: 'group-hover:from-red-400 group-hover:to-pink-400',
-    };
+    return { icon: Heart, tone: 'text-blue-800 bg-blue-50 border-blue-100' };
   }
   if (name.includes('créat') || name.includes('art') || name.includes('atelier')) {
-    return {
-      icon: FaPalette,
-      badge: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-      iconGradient: 'from-cyan-500 to-blue-500',
-      hover: 'group-hover:from-cyan-400 group-hover:to-blue-400',
-    };
+    return { icon: Palette, tone: 'text-blue-800 bg-blue-50 border-blue-100' };
   }
   if (name.includes('camp') || name.includes('vacances')) {
-    return {
-      icon: FaCampground,
-      badge: 'bg-blue-100 text-blue-800 border-blue-200',
-      iconGradient: 'from-blue-500 to-cyan-500',
-      hover: 'group-hover:from-blue-400 group-hover:to-cyan-400',
-    };
+    return { icon: Tent, tone: 'text-blue-800 bg-blue-50 border-blue-100' };
   }
 
-  return {
-    icon: FaNewspaper,
-    badge: 'bg-blue-100 text-blue-800 border-blue-200',
-    iconGradient: 'from-blue-500 to-cyan-500',
-    hover: 'group-hover:from-blue-400 group-hover:to-cyan-400',
-  };
+  return { icon: Newspaper, tone: 'text-blue-700 bg-blue-50 border-blue-100' };
 }
 
 export default function PostCard({ article, onClick }) {
   const style = getCategoryStyle(article?.category?.name);
   const IconComponent = style.icon;
-  const imgSrc = articleImageUrl(article); // plus de fallback
+  const imgSrc = articleImageUrl(article);
   const dateLabel = articleDateLabel(article);
   const categoryName = article?.category?.name || 'Actualité';
-
-  const getExcerpt = () => {
-    if (article?.excerpt) return article.excerpt;
-    if (!article?.content) return '';
-    const div = document.createElement('div');
-    div.innerHTML = article.content;
-    const text = div.textContent || div.innerText || '';
-    return text.length > 150 ? text.substring(0, 150) + '...' : text;
-  };
+  const excerpt = article?.excerpt || extractExcerpt(article?.content, 150);
 
   return (
-    <div
-      className="group relative cursor-pointer"
-      onClick={() => onClick?.(article)}
-    >
-      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500" />
-
-      <div className="relative bg-white rounded-2xl p-6 shadow-xl border border-blue-100 group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 h-full flex flex-col">
-
-        {/* Badge catégorie + icône */}
-        <div className="flex items-center justify-between mb-4">
-          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${style.badge}`}>
-            {categoryName}
-          </span>
-          <div className={`w-10 h-10 bg-gradient-to-br ${style.iconGradient} ${style.hover} rounded-full flex items-center justify-center transition-all duration-300`}>
-            <IconComponent className="w-5 h-5 text-white" />
-          </div>
-        </div>
-
-        {/* Image — affichée seulement si elle existe */}
-        {imgSrc && (
-          <div className="relative mb-6 overflow-hidden rounded-xl">
+    <article className="h-full">
+      <button
+        type="button"
+        onClick={() => onClick?.(article)}
+        className="article-card group"
+        aria-label={`Lire l'actualité : ${article?.title || ''}`}
+      >
+        {imgSrc ? (
+          <div className="aspect-[16/10] w-full overflow-hidden bg-sky-50">
             <img
               src={imgSrc}
-              alt={article?.title || ''}
-              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              alt={article?.title || "Illustration de l'actualité"}
+              className="h-full w-full object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        ) : (
+          <div className="flex aspect-[16/10] w-full items-center justify-center bg-sky-50 text-blue-700">
+            <Newspaper className="h-10 w-10" aria-hidden="true" />
           </div>
         )}
 
-        {/* Contenu */}
-        <div className="flex-1 flex flex-col">
-          <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+        <div className="flex flex-1 flex-col p-5">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <span className={cx('inline-flex items-center gap-2 rounded-lg border px-3 py-1 text-xs font-bold', style.tone)}>
+              <IconComponent className="h-3.5 w-3.5" aria-hidden="true" />
+              {categoryName}
+            </span>
+            {dateLabel && (
+              <span className="inline-flex items-center gap-1 text-xs font-medium text-slate-500">
+                <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
+                {dateLabel}
+              </span>
+            )}
+          </div>
+
+          <h3 className="text-xl font-bold leading-snug text-blue-950">
             {article?.title}
           </h3>
 
-          <p className="text-gray-600 leading-relaxed flex-1 text-sm mb-4 line-clamp-3">
-            {getExcerpt()}
+          <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-slate-600">
+            {excerpt}
           </p>
 
-          {/* Footer */}
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-            <div className="flex items-center space-x-2">
-              <FaHeart className="w-4 h-4 text-red-400" />
-              <span className="text-sm text-gray-600 font-medium">Maison Bleue de Julien</span>
-            </div>
-            <div className="flex items-center space-x-1 text-xs text-gray-500">
-              <FaCalendarAlt className="w-3 h-3" />
-              <span>{dateLabel}</span>
-            </div>
+          <div className="mt-5 flex items-center gap-2 border-t border-slate-200 pt-4 text-sm font-semibold text-blue-800">
+            <span>Lire la suite</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </div>
         </div>
-      </div>
-    </div>
+      </button>
+    </article>
   );
 }

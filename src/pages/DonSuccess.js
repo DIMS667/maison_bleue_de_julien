@@ -1,27 +1,20 @@
 import React from 'react';
+import { CheckCircle } from 'lucide-react';
+import { ButtonLink, PageState } from '../components/DesignSystem';
 
-const DonSuccess = () => {
+export default function DonSuccess() {
   return (
-    <div className="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto">
-        <h1 className="text-3xl font-bold text-green-600 mb-4 text-center">
-          Paiement réussi 👍
-        </h1>
-        <p className="text-lg text-gray-700 mb-4 text-center">
-          Merci pour votre générosité ! Votre don a été reçu avec succès. 
-          Votre soutien aide à faire une différence significative.
-        </p>
-        <div className="text-center">
-          <a
-            href="/"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none"
-          >
-            Retour à l'accueil
-          </a>
-        </div>
+    <div className="page-surface min-h-[65vh] bg-sky-50/70 py-16 sm:py-24">
+      <div className="site-container">
+        <PageState
+          icon={CheckCircle}
+          title="Votre don a bien été reçu"
+          action={<ButtonLink to="/">Retour à l'accueil</ButtonLink>}
+        >
+          Merci pour votre générosité. Votre soutien contribue directement aux actions
+          menées auprès des personnes autistes et de leurs familles.
+        </PageState>
       </div>
     </div>
   );
-};
-
-export default DonSuccess;
+}

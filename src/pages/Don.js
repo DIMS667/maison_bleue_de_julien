@@ -1,336 +1,304 @@
-import React, { useState } from "react";
-import orangeLogo from "../assets/images/orange.png";
-import mtnLogo from "../assets/images/mtn.jpeg";
+import React, { useState } from 'react';
+import { Check, ChevronRight, CreditCard, GraduationCap, Heart, LoaderCircle, Shield, Smartphone, Users } from 'lucide-react';
+import orangeLogo from '../assets/images/orange.png';
+import mtnLogo from '../assets/images/mtn.jpeg';
+import { PageHero, SectionHeading } from '../components/DesignSystem';
 
-import { Heart, Shield, Users, GraduationCap, CreditCard, Smartphone, ChevronRight } from 'lucide-react';
+const impactCards = [
+  {
+    title: 'Éducation',
+    text: "Financez des programmes éducatifs spécialisés et des ateliers d'apprentissage.",
+    icon: GraduationCap,
+  },
+  {
+    title: 'Accompagnement',
+    text: "Soutenez l'accompagnement personnalisé des familles et des jeunes autistes.",
+    icon: Users,
+  },
+  {
+    title: 'Inclusion',
+    text: "Favorisez l'inclusion sociale et professionnelle des personnes autistes.",
+    icon: Heart,
+  },
+];
 
-const EnhancedDon = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [amount, setAmount] = useState("");
+const directPayments = [
+  {
+    title: 'Orange Money',
+    subtitle: 'Don direct et rapide',
+    number: '+237 699 89 38 38',
+    name: 'Jeanne Kiboum Tonye',
+    logo: orangeLogo,
+    logoAlt: 'Logo Orange Money',
+    tone: 'icon-box--warm',
+  },
+  {
+    title: 'MTN Mobile Money',
+    subtitle: 'Don direct et rapide',
+    number: '+237 675 95 31 23',
+    name: 'Jules Dimitri Tonye',
+    logo: mtnLogo,
+    logoAlt: 'Logo MTN Mobile Money',
+    tone: 'icon-box--warm',
+  },
+];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+export default function Don() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [amount, setAmount] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setFormError('');
 
     try {
-      const response = await fetch("/api/donations/initiate/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, amount })
+      const response = await fetch('/api/donations/initiate/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, amount }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.payment_url) {
-          window.location.href = data.payment_url;
-        } else {
-          alert("Erreur : URL de paiement non reçue.");
-        }
-      } else {
-        const errorData = await response.json();
-        alert(
-          "Erreur lors de l'initiation du paiement : " +
-            (errorData.detail || "Inconnue")
-        );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Le paiement n'a pas pu être initié.");
       }
+
+      if (!data.payment_url) {
+        throw new Error("L'adresse de paiement n'a pas été reçue.");
+      }
+
+      window.location.href = data.payment_url;
     } catch (error) {
-      console.error("Erreur requête:", error);
-      alert("Une erreur est survenue. Vérifiez la console.");
+      console.error('Erreur requête:', error);
+      setFormError(error.message || 'Une erreur est survenue. Veuillez réessayer.');
+      setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
-      
-      {/* En-tête héroïque */}
-      <div className="relative bg-gradient-to-br from-blue-600 via-cyan-500 to-blue-700 text-white py-20 overflow-hidden">
-        {/* Éléments décoratifs */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-red-300 rounded-full blur-2xl animate-pulse delay-500"></div>
-        </div>
+    <div className="page-surface min-h-screen">
+      <PageHero compact eyebrow="Soutenez notre mission" icon={Heart} title="Faire un don">
+        Votre soutien finance des activités adaptées, l'accompagnement des familles
+        et les actions de sensibilisation pour l'inclusion des personnes autistes.
+      </PageHero>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 mb-8">
-            <Heart className="w-6 h-6 mr-3" />
-            <span className="text-lg font-semibold">Soutenez notre mission</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Faites un Don
-          </h1>
-          
-          <div className="w-24 h-1 bg-white rounded-full mx-auto mb-8"></div>
-          
-          <p className="text-xl md:text-2xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
-            Soutenez nos initiatives pour l'inclusion des personnes autistes via Orange Money, 
-            MTN Mobile Money ou notre plateforme sécurisée en ligne.
-          </p>
-        </div>
-      </div>
+      <div>
+        <section className="section-pad bg-white">
+          <div className="site-container">
+            <SectionHeading eyebrow="Votre impact" icon={Shield} title="Votre don change des vies">
+              Chaque contribution aide l'association à maintenir un accompagnement
+              humain, régulier et concret.
+            </SectionHeading>
 
-      {/* Contenu principal */}
-      <div className="max-w-6xl mx-auto py-16 px-4">
-        
-        {/* Section impact */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-8">
-            Votre don change des vies
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-blue-700 mb-3">Éducation</h3>
-              <p className="text-gray-600">Financez des programmes éducatifs spécialisés et des ateliers d'apprentissage</p>
-            </div>
-            
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-cyan-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-cyan-700 mb-3">Accompagnement</h3>
-              <p className="text-gray-600">Soutenez l'accompagnement personnalisé des familles et des jeunes autistes</p>
-            </div>
-            
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-red-700 mb-3">Inclusion</h3>
-              <p className="text-gray-600">Favorisez l'inclusion sociale et professionnelle des personnes autistes</p>
+            <div className="grid gap-5 md:grid-cols-3">
+              {impactCards.map(({ title, text, icon: Icon }) => (
+                <article key={title} className="soft-card p-6">
+                  <span className="icon-box">
+                    <Icon className="h-6 w-6" aria-hidden="true" />
+                  </span>
+                  <h2 className="mt-5 text-xl font-bold text-slate-900">{title}</h2>
+                  <p className="mt-3 leading-7 text-slate-600">{text}</p>
+                </article>
+              ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Grid principal */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          
-          {/* Colonne gauche: Don classique */}
-          <div className="space-y-8">
-            
-            {/* Section Orange Money */}
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-orange-100">
-              <div className="flex items-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mr-4">
-                  <Smartphone className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-orange-600">Orange Money</h2>
-                  <p className="text-orange-500 text-sm">Don direct et rapide</p>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border border-orange-200">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <p className="text-gray-700 mb-2">Envoyez votre don au numéro :</p>
-                    <div className="text-2xl font-bold text-orange-700 mb-2">+237 699 89 38 38</div>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-semibold">Nom :</span> Jeanne Kiboum Tonye
+        <section className="section-pad bg-sky-50/70">
+          <div className="site-container grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="space-y-5">
+              {directPayments.map((method) => (
+                <article key={method.title} className="section-card p-6">
+                  <div className="flex items-start gap-4">
+                    <span className={`icon-box ${method.tone}`}>
+                      <Smartphone className="h-6 w-6" aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <h2 className="text-2xl font-extrabold text-slate-900">{method.title}</h2>
+                      <p className="text-sm font-semibold text-slate-500">{method.subtitle}</p>
+                    </div>
+                    <img src={method.logo} alt={method.logoAlt} className="h-14 w-14 shrink-0 rounded-lg object-contain" loading="lazy" />
+                  </div>
+
+                  <div className="mt-6 rounded-lg border border-amber-100 bg-amber-50 p-5">
+                    <p className="text-sm font-semibold text-slate-600">Envoyez votre don au numéro</p>
+                    <a href={`tel:${method.number.replace(/\s/g, '')}`} className="mt-2 block text-2xl font-extrabold text-slate-950 hover:underline">
+                      {method.number}
+                    </a>
+                    <p className="mt-2 text-sm text-slate-600">
+                      <span className="font-bold">Nom :</span> {method.name}
                     </p>
                   </div>
-                  <img
-                    src={orangeLogo}
-                    alt="Orange Money"
-                    className="w-20 h-20 object-contain ml-4"
-                  />
-                </div>
-              </div>
-            </div>
+                </article>
+              ))}
 
-            {/* Section MTN Money */}
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-yellow-100">
-              <div className="flex items-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mr-4">
-                  <Smartphone className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-yellow-600">MTN Mobile Money</h2>
-                  <p className="text-yellow-500 text-sm">Don direct et rapide</p>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 border border-yellow-200">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <p className="text-gray-700 mb-2">Envoyez votre don au numéro :</p>
-                    <div className="text-2xl font-bold text-yellow-700 mb-2">+237 675 95 31 23</div>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-semibold">Nom :</span> Jules Dimitri Tonye
-                    </p>
-                  </div>
-                  <img
-                    src={mtnLogo}
-                    alt="MTN Money"
-                    className="w-20 h-20 object-contain ml-4 rounded-lg"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Section avantages du don */}
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-200">
-              <h3 className="text-lg font-bold text-blue-800 mb-4 flex items-center">
-                <Shield className="w-5 h-5 mr-2" />
-                Pourquoi faire un don ?
-              </h3>
-              <ul className="space-y-3">
-                <li className="flex items-center text-gray-700">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                  Soutenir nos projets éducatifs et communautaires
-                </li>
-                <li className="flex items-center text-gray-700">
-                  <div className="w-2 h-2 bg-cyan-500 rounded-full mr-3"></div>
-                  Offrir des opportunités à ceux qui en ont besoin
-                </li>
-                <li className="flex items-center text-gray-700">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                  Contribuer à un impact social durable
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Colonne droite: Formulaire CinetPay */}
-          <div className="bg-white rounded-3xl p-8 shadow-xl border border-blue-100">
-            <div className="flex items-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mr-4">
-                <CreditCard className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                  Don en ligne sécurisé
+              <div className="section-card border-l-4 border-l-blue-700 p-6">
+                <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900">
+                  <Shield className="h-5 w-5 text-blue-700" aria-hidden="true" />
+                  Pourquoi faire un don ?
                 </h2>
-                <p className="text-blue-500 text-sm">Powered by CinetPay</p>
+                <ul className="mt-4 grid gap-3 text-slate-700">
+                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-blue-700" aria-hidden="true" /><span>Soutenir nos projets éducatifs et communautaires.</span></li>
+                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-blue-700" aria-hidden="true" /><span>Offrir des opportunités à ceux qui en ont besoin.</span></li>
+                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-blue-700" aria-hidden="true" /><span>Contribuer à un impact social durable.</span></li>
+                </ul>
               </div>
             </div>
-            
-            <div onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Nom complet
-                </label>
-                <input
-                  type="text"
-                  className="w-full border-2 border-gray-200 rounded-xl p-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                  placeholder="Entrez votre nom complet"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
+
+            <section className="section-card p-6 sm:p-8" aria-labelledby="don-online-title">
+              <div className="mb-6 flex items-start gap-4">
+                <span className="icon-box">
+                  <CreditCard className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <div>
+                  <h2 id="don-online-title" className="text-2xl font-extrabold text-slate-900">
+                    Don en ligne sécurisé
+                  </h2>
+                  <p className="text-sm font-semibold text-blue-700">Powered by CinetPay</p>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Numéro de téléphone
-                </label>
-                <input
-                  type="text"
-                  className="w-full border-2 border-gray-200 rounded-xl p-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                  placeholder="+237 6xx xxx xxx"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Email <span className="text-gray-400 font-normal">(facultatif)</span>
-                </label>
-                <input
-                  type="email"
-                  className="w-full border-2 border-gray-200 rounded-xl p-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                  placeholder="votre@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Montant (XAF)
-                </label>
-                <div className="relative">
+              <form onSubmit={handleSubmit} className="space-y-5" aria-busy={submitting}>
+                <div>
+                  <label htmlFor="don-name" className="form-label">Nom complet</label>
                   <input
-                    type="number"
-                    className="w-full border-2 border-gray-200 rounded-xl p-4 pr-16 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                    placeholder="Ex: 1000"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    id="don-name"
+                    name="name"
+                    type="text"
+                    className="form-field"
+                    placeholder="Entrez votre nom complet"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    autoComplete="name"
                     required
                   />
-                  <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">
-                    XAF
-                  </span>
                 </div>
-              </div>
 
-              {/* Montants suggérés */}
+                <div>
+                  <label htmlFor="don-phone" className="form-label">Numéro de téléphone</label>
+                  <input
+                    id="don-phone"
+                    name="phone"
+                    type="tel"
+                    inputMode="tel"
+                    className="form-field"
+                    placeholder="+237 6xx xxx xxx"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    autoComplete="tel"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="don-email" className="form-label">
+                    Email <span className="form-help">(facultatif)</span>
+                  </label>
+                  <input
+                    id="don-email"
+                    name="email"
+                    type="email"
+                    className="form-field"
+                    placeholder="votre@email.com"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    autoComplete="email"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="don-amount" className="form-label">Montant (XAF)</label>
+                  <div className="relative">
+                    <input
+                      id="don-amount"
+                      name="amount"
+                      type="number"
+                      min="1"
+                      inputMode="numeric"
+                      className="form-field pr-16"
+                      placeholder="Ex: 1000"
+                      value={amount}
+                      onChange={(event) => setAmount(event.target.value)}
+                      required
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-500">
+                      XAF
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="mb-3 text-sm font-semibold text-slate-600">Montants suggérés</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[1000, 5000, 10000].map((suggestedAmount) => (
+                      <button
+                        key={suggestedAmount}
+                        type="button"
+                        onClick={() => setAmount(suggestedAmount.toString())}
+                        aria-pressed={amount === suggestedAmount.toString()}
+                        className={`rounded-lg border px-3 py-2 text-sm font-bold transition-colors ${
+                          amount === suggestedAmount.toString()
+                            ? 'border-blue-700 bg-blue-700 text-white'
+                            : 'border-sky-100 bg-sky-50 text-blue-800 hover:bg-sky-100'
+                        }`}
+                      >
+                        {suggestedAmount.toLocaleString('fr-FR')} XAF
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {formError && (
+                  <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm font-semibold leading-6 text-red-800" role="alert">
+                    {formError}
+                  </div>
+                )}
+
+                <button type="submit" className="btn btn-primary w-full" disabled={submitting}>
+                  {submitting ? (
+                    <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                  )}
+                  <span>{submitting ? 'Redirection en cours...' : 'Procéder au paiement'}</span>
+                </button>
+              </form>
+
+              <div className="mt-6 rounded-lg border border-emerald-100 bg-emerald-50 p-4">
+                <p className="flex items-center gap-2 text-sm font-bold text-emerald-900">
+                  <Shield className="h-5 w-5" aria-hidden="true" />
+                  Paiement 100% sécurisé
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Vous serez redirigé vers CinetPay pour choisir votre moyen de
+                  paiement : Orange Money, MTN Money, carte bancaire, etc.
+                </p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section className="section-pad-sm bg-white">
+          <div className="site-container">
+            <div className="section-card grid gap-5 border-l-4 border-l-[#d65f4a] p-6 sm:p-8 md:grid-cols-[auto_1fr] md:items-center">
+              <span className="icon-box icon-box--coral"><Heart className="h-6 w-6" aria-hidden="true" /></span>
               <div>
-                <p className="text-sm text-gray-600 mb-3">Montants suggérés :</p>
-                <div className="grid grid-cols-3 gap-3">
-                  {[1000, 5000, 10000].map((suggestedAmount) => (
-                    <button
-                      key={suggestedAmount}
-                      type="button"
-                      onClick={() => setAmount(suggestedAmount.toString())}
-                      className="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors duration-200 font-medium"
-                    >
-                      {suggestedAmount.toLocaleString()} XAF
-                    </button>
-                  ))}
-                </div>
+                <h2 className="text-2xl font-extrabold text-blue-950">Chaque don compte</h2>
+                <p className="mt-2 max-w-3xl text-lg leading-8 text-slate-600">
+                  Grâce à votre générosité, nous continuons d'accompagner les familles
+                  et de créer des opportunités pour les personnes autistes.
+                </p>
               </div>
-
-              <button
-                type="submit"
-                onClick={handleSubmit}
-                className="group w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center"
-              >
-                <span>Procéder au paiement</span>
-                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-            </div>
-            
-            {/* Info sécurité */}
-            <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
-              <div className="flex items-center mb-2">
-                <Shield className="w-5 h-5 text-green-600 mr-2" />
-                <span className="text-sm font-semibold text-green-800">Paiement 100% sécurisé</span>
-              </div>
-              <p className="text-sm text-gray-600">
-                Vous serez redirigé vers CinetPay pour choisir votre moyen de paiement 
-                (Orange Money, MTN Money, carte bancaire, etc.).
-              </p>
             </div>
           </div>
-        </div>
-
-        {/* Section témoignage/impact */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 rounded-3xl p-8 text-white text-center">
-          <div className="max-w-3xl mx-auto">
-            <Heart className="w-16 h-16 mx-auto mb-6 text-red-300" />
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Chaque don compte pour un avenir plus inclusif
-            </h3>
-            <p className="text-xl text-blue-100 leading-relaxed">
-              Grâce à votre générosité, nous continuons d'accompagner les familles et de créer 
-              des opportunités pour les personnes autistes. Ensemble, construisons un monde plus bienveillant.
-            </p>
-            
-           
-          
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   );
-};
-
-export default EnhancedDon;
+}

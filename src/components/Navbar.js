@@ -1,214 +1,309 @@
-// src/components/Navbar.js
-// Mis à jour : ajout du lien Publications
-
-import React, { useState, useEffect } from 'react';
-import { FaFacebookF, FaYoutube, FaTiktok, FaInstagram, FaHeart, FaBars, FaTimes } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  ChevronDown,
+  Heart,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  X,
+} from 'lucide-react';
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
+import logo from '../assets/images/maison_bleu.jpg';
+import { cx } from './DesignSystem';
 
 const navigation = [
-  { name: 'Accueil',      href: '/' },
-  { name: 'Autisme',      href: '/autisme' },
-  { name: 'Actualité',    href: '/actualite' },
-  { name: 'Publications', href: '/publications' },
-  { name: 'Boutique',     href: '/boutique' },
-  { name: 'projets',  href: '/mbj' },
-  { name: 'Don',          href: '/don' },
-  { name: 'Contact',      href: '/contact' },
+  { name: 'Accueil', href: '/' },
+  {
+    name: "L'association",
+    children: [
+      { name: 'Qui sommes-nous ?', href: '/mbj' },
+      { name: 'Qui est Julien ?', href: '/julien' },
+      { name: "Adhérer à l'association", href: '/adherer' },
+    ],
+  },
+  { name: "Comprendre l'autisme", href: '/autisme' },
+  {
+    name: 'Nos actions',
+    children: [
+      { name: 'Actualités', href: '/actualite' },
+      { name: 'Publications', href: '/publications' },
+      { name: 'Boutique solidaire', href: '/boutique' },
+    ],
+  },
+  { name: 'Contact', href: '/contact' },
 ];
 
-export default function EnhancedNavbar() {
-  const [scrolled, setScrolled] = useState(false);
+const socialLinks = [
+  {
+    name: 'Facebook',
+    href: 'https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien',
+    icon: FaFacebookF,
+  },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw==',
+    icon: FaInstagram,
+  },
+  { name: 'YouTube', href: 'https://youtube.com', icon: FaYoutube },
+  {
+    name: 'TikTok',
+    href: 'https://www.tiktok.com/@lambj_julien?_t=ZM-8tIvC8b8qVZ&_r=1',
+    icon: FaTiktok,
+  },
+];
+
+function isItemActive(item, pathname) {
+  if (item.href) {
+    return item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+  }
+
+  return item.children?.some((child) => pathname.startsWith(child.href));
+}
+
+function SocialLinks() {
+  return (
+    <div className="flex items-center gap-1" aria-label="Réseaux sociaux">
+      {socialLinks.map(({ name, href, icon: Icon }) => (
+        <a
+          key={name}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Suivre La Maison Bleue de Julien sur ${name}`}
+          className="header-social-link"
+        >
+          <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+        </a>
+      ))}
+    </div>
+  );
+}
+
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
+  const headerRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Fermer le menu mobile à chaque changement de route
-  useEffect(() => {
     setMobileMenuOpen(false);
+    setOpenMenu(null);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const closeOnOutsideClick = (event) => {
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        setOpenMenu(null);
+      }
+    };
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setOpenMenu(null);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', closeOnOutsideClick);
+    document.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', closeOnOutsideClick);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, []);
+
   return (
-    <>
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-cyan-100'
-          : 'bg-white/90 backdrop-blur-sm shadow-md'
-      }`}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16 lg:h-20">
+    <header ref={headerRef} className="site-header">
+      <div className="header-utility">
+        <div className="site-container flex min-h-9 items-center justify-between gap-4">
+          <div className="flex min-w-0 items-center gap-4 text-xs sm:text-sm">
+            <a href="tel:+237699893838" className="header-utility-link">
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>+237 699 893 838</span>
+            </a>
+            <a
+              href="mailto:contact@lamaisonbleuedejulien.org"
+              className="header-utility-link header-email"
+            >
+              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>contact@lamaisonbleuedejulien.org</span>
+            </a>
+            <span className="header-utility-link header-location">
+              <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>Nkoabang, Yaoundé</span>
+            </span>
+          </div>
+          <SocialLinks />
+        </div>
+      </div>
 
-            {/* Logo */}
-            <Link to="/" className="flex-shrink-0 group">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <FaHeart className="text-white w-5 h-5 lg:w-6 lg:h-6" />
-                </div>
-                <div className="hidden sm:block">
-                  <h2 className="text-blue-800 font-bold text-lg lg:text-xl">Maison Bleue</h2>
-                  <p className="text-cyan-600 text-xs lg:text-sm -mt-1">de Julien</p>
-                </div>
-              </div>
-            </Link>
+      <nav className="bg-white" aria-label="Navigation principale">
+        <div className="site-container flex min-h-[84px] items-center justify-between gap-5">
+          <Link to="/" className="brand-link" aria-label="La Maison Bleue de Julien, accueil">
+            <img
+              src={logo}
+              alt=""
+              className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16"
+            />
+            <span className="min-w-0">
+              <span className="block text-[15px] font-extrabold leading-tight text-blue-950 sm:text-lg">
+                La Maison Bleue de Julien
+              </span>
+              <span className="mt-1 hidden text-xs font-medium text-slate-500 sm:block">
+                Autisme : vivre la différence
+              </span>
+            </span>
+          </Link>
 
-            {/* Navigation Desktop */}
-            <div className="hidden lg:flex items-center justify-center flex-1">
-              <div className="flex items-center space-x-1 bg-blue-50/50 rounded-full px-2 py-1 backdrop-blur-sm border border-cyan-100/50">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                      location.pathname === item.href
-                        ? 'text-white bg-gradient-to-r from-blue-600 to-cyan-600 shadow-lg'
-                        : 'text-blue-700 hover:text-cyan-600 hover:bg-cyan-50'
-                    }`}
-                  >
-                    {item.name === 'Don' ? (
-                      <span className="flex items-center">
-                        <FaHeart className="w-3 h-3 mr-1 text-red-500" />
-                        Don
-                      </span>
-                    ) : item.name}
+          <div className="hidden h-[84px] items-stretch xl:flex">
+            {navigation.map((item) => {
+              const active = isItemActive(item, location.pathname);
 
-                    {location.pathname === item.href && (
-                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-yellow-400 rounded-full" />
+              if (item.children) {
+                const expanded = openMenu === item.name;
+                return (
+                  <div key={item.name} className="nav-dropdown relative flex items-stretch">
+                    <button
+                      type="button"
+                      onClick={() => setOpenMenu(expanded ? null : item.name)}
+                      aria-expanded={expanded}
+                      aria-haspopup="true"
+                      className={cx('nav-main-link', active && 'nav-main-link--active')}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown
+                        className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')}
+                        aria-hidden="true"
+                      />
+                    </button>
+
+                    {expanded && (
+                      <div className="nav-dropdown-panel">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            to={child.href}
+                            aria-current={
+                              location.pathname.startsWith(child.href) ? 'page' : undefined
+                            }
+                            className={cx(
+                              'nav-dropdown-link',
+                              location.pathname.startsWith(child.href) &&
+                                'nav-dropdown-link--active'
+                            )}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
                     )}
-                  </Link>
-                ))}
-              </div>
-            </div>
+                  </div>
+                );
+              }
 
-            {/* Social + CTA Desktop */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <a href="https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm">
-                  <FaFacebookF className="w-4 h-4" />
-                </a>
-                <a href="https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw==" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm">
-                  <FaInstagram className="w-4 h-4" />
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm">
-                  <FaYoutube className="w-4 h-4" />
-                </a>
-                <a href="https://www.tiktok.com/@lambj_julien?_t=ZM-8tIvC8b8qVZ&_r=1" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm">
-                  <FaTiktok className="w-4 h-4" />
-                </a>
-              </div>
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cx('nav-main-link', active && 'nav-main-link--active')}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
 
-              <Link to="/don">
-                <button className="group relative px-6 py-2 text-sm font-semibold text-white bg-gradient-to-r from-red-500 via-pink-500 to-red-600 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
-                  <span className="absolute inset-0 bg-gradient-to-r from-red-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative flex items-center">
-                    <FaHeart className="w-4 h-4 mr-2 animate-pulse" />
-                    Faire un Don
-                  </span>
-                </button>
-              </Link>
-            </div>
-
-            {/* Mobile : Social compact + Hamburger */}
-            <div className="lg:hidden flex items-center space-x-3">
-              <div className="flex items-center space-x-1">
-                <a href="https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien" target="_blank" rel="noopener noreferrer"
-                  className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-sm">
-                  <FaFacebookF className="w-3 h-3" />
-                </a>
-                <a href="https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw==" target="_blank" rel="noopener noreferrer"
-                  className="w-7 h-7 flex items-center justify-center rounded-full bg-pink-50 text-pink-600 shadow-sm">
-                  <FaInstagram className="w-3 h-3" />
-                </a>
-              </div>
-
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-colors duration-200"
-              >
-                <span className="sr-only">Ouvrir le menu</span>
-                {mobileMenuOpen
-                  ? <FaTimes className="block h-6 w-6" />
-                  : <FaBars className="block h-6 w-6" />
-                }
-              </button>
-            </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <Link to="/don" className="btn btn-donation header-desktop-donation">
+              <Heart className="h-4 w-4" aria-hidden="true" />
+              <span>Faire un don</span>
+            </Link>
+            <Link to="/don" className="btn btn-donation header-mobile-donation px-3">
+              <Heart className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden sm:inline">Faire un don</span>
+              <span className="sm:hidden">Don</span>
+            </Link>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="menu-mobile"
+              className="header-menu-button"
+            >
+              <span className="sr-only">
+                {mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              </span>
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <Menu className="h-5 w-5" aria-hidden="true" />
+              )}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Menu Panel */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full">
-            <div className="bg-white/95 backdrop-blur-lg border-t border-cyan-100 shadow-xl">
-              <div className="px-4 py-6 space-y-4">
+          <div id="menu-mobile" className="mobile-nav xl:hidden">
+            <div className="site-container py-4">
+              {navigation.map((item) => {
+                const active = isItemActive(item, location.pathname);
 
-                <div className="space-y-2">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
-                        location.pathname === item.href
-                          ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg'
-                          : 'text-blue-700 hover:bg-cyan-50 hover:text-cyan-600'
-                      }`}
-                    >
-                      <span className="flex items-center">
-                        {item.name === 'Don' && <FaHeart className="w-4 h-4 mr-2 text-red-500" />}
-                        {item.name}
-                      </span>
-                      {location.pathname === item.href && (
-                        <div className="w-2 h-2 bg-yellow-400 rounded-full" />
+                if (item.children) {
+                  const expanded = openMenu === item.name;
+                  return (
+                    <div key={item.name} className="border-b border-slate-100 last:border-0">
+                      <button
+                        type="button"
+                        onClick={() => setOpenMenu(expanded ? null : item.name)}
+                        aria-expanded={expanded}
+                        className={cx('mobile-nav-link w-full', active && 'mobile-nav-link--active')}
+                      >
+                        <span>{item.name}</span>
+                        <ChevronDown
+                          className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')}
+                          aria-hidden="true"
+                        />
+                      </button>
+                      {expanded && (
+                        <div className="mb-2 border-l-2 border-blue-100 pl-3">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              to={child.href}
+                              aria-current={location.pathname.startsWith(child.href) ? 'page' : undefined}
+                              className={cx(
+                                'block px-3 py-2.5 text-sm font-medium text-slate-600 hover:text-blue-800',
+                                location.pathname.startsWith(child.href) && 'font-bold text-blue-800'
+                              )}
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </div>
                       )}
-                    </Link>
-                  ))}
-                </div>
+                    </div>
+                  );
+                }
 
-                {/* Réseaux sociaux mobiles */}
-                <div className="flex justify-center space-x-4 py-4 border-t border-cyan-100">
-                  <a href="https://web.facebook.com/search/top/?q=la%20maison%20bleue%20de%20julien" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm">
-                    <FaFacebookF className="w-5 h-5" />
-                  </a>
-                  <a href="https://www.instagram.com/maisonbleue2023?igsh=MTV1Mm1hdHN0MzV3bw==" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white transition-all duration-300 shadow-sm">
-                    <FaInstagram className="w-5 h-5" />
-                  </a>
-                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-sm">
-                    <FaYoutube className="w-5 h-5" />
-                  </a>
-                  <a href="https://www.tiktok.com/@lambj_julien?_t=ZM-8tIvC8b8qVZ&_r=1" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 shadow-sm">
-                    <FaTiktok className="w-5 h-5" />
-                  </a>
-                </div>
-
-                {/* Bouton Don mobile */}
-                <div className="pt-2">
-                  <Link to="/don" className="block">
-                    <button className="w-full py-3 px-6 text-base font-semibold text-white bg-gradient-to-r from-red-500 via-pink-500 to-red-600 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <span className="flex items-center justify-center">
-                        <FaHeart className="w-4 h-4 mr-2 animate-pulse" />
-                        Faire un Don
-                      </span>
-                    </button>
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={cx('mobile-nav-link', active && 'mobile-nav-link--active')}
+                  >
+                    {item.name}
                   </Link>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         )}
       </nav>
-
-      {/* Spacer */}
-      <div className="h-16 lg:h-20" />
-    </>
+    </header>
   );
 }
