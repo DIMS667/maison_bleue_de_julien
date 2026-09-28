@@ -4,11 +4,12 @@
 
 :root {
   --mbj-ink: #172b4d;
-  --mbj-navy: #143d63;
-  --mbj-blue: #246b9e;
-  --mbj-sky: #dcecf5;
+  --mbj-navy: #075fab;
+  --mbj-blue: #075fab;
+  --mbj-blue-light: #5d9cec;
+  --mbj-sky: #d4e3ff;
   --mbj-coral: #d65f4a;
-  --mbj-soft: #f5f7f9;
+  --mbj-soft: #f7f9fc;
   --mbj-surface: #ffffff;
   --mbj-line: #dbe3e9;
   --mbj-muted: #58697a;
@@ -40,12 +41,12 @@ code {
 }
 
 ::selection {
-  background: #dcecf5;
+  background: var(--mbj-sky);
   color: var(--mbj-ink);
 }
 
 :focus-visible {
-  outline: 3px solid #5aa0c9;
+  outline: 3px solid var(--mbj-blue-light);
   outline-offset: 3px;
 }
 
@@ -412,7 +413,7 @@ a.header-utility-link:hover {
 
 .page-hero {
   border-bottom: 1px solid #e0e7ec;
-  background: #f4f8fa;
+  background: #f7f9fc;
 }
 
 .page-hero__inner {
@@ -575,7 +576,7 @@ a.header-utility-link:hover {
 }
 
 .btn-primary:hover {
-  background: #0e3152;
+  background: #05508f;
 }
 
 .btn-secondary {
@@ -635,7 +636,7 @@ a.header-utility-link:hover {
 
 .icon-box--soft {
   color: var(--mbj-navy);
-  background: #e7f1f6;
+  background: var(--mbj-sky);
 }
 
 .stat-tile {

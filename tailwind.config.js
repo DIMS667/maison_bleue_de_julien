@@ -5,6 +5,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        blue: {
+          50: "#f7f9fc",
+          100: "#d4e3ff",
+          700: "#075fab",
+          800: "#05508f",
+          900: "#064a86",
+          950: "#075fab",
+        },
+      },
       animation: {
         "shimmer-slide":
           "shimmer-slide var(--speed) ease-in-out infinite alternate",

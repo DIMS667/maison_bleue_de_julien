@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   BarChart3,
   BookOpen,
+  Download,
   Gamepad2,
   Mail,
   MessageCircle,
@@ -38,9 +39,24 @@ const activities = [
 export default function MbjKidsPage() {
   return (
     <div className="page-surface min-h-screen">
-      <PageHero compact eyebrow="Application mobile" icon={BookOpen} title="Mbj Kids">
+      <PageHero
+        compact
+        eyebrow="Application mobile"
+        icon={BookOpen}
+        title="Mbj Kids"
+        actions={
+          <ButtonLink
+            href="/downloads/mbj-kids-1.0.0.apk"
+            icon={Download}
+            download="mbj-kids-1.0.0.apk"
+          >
+            Télécharger l’APK Android
+          </ButtonLink>
+        }
+      >
         Des histoires, des jeux, des pictogrammes et du dessin pour découvrir,
         créer et communiquer à son rythme.
+        <span className="mt-3 block text-sm">Android · version 1.0.0 · téléchargement direct</span>
       </PageHero>
 
       <section className="section-pad bg-white">
