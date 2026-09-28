@@ -234,6 +234,29 @@ export default function MbjPage() {
           </div>
         </section>
 
+        <section className="section-pad bg-white">
+          <div className="site-container">
+            <div className="section-card grid gap-6 border-t-4 border-t-blue-700 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <h2 className="text-2xl font-extrabold text-blue-950 sm:text-3xl">L'application Mbj Kids</h2>
+                <p className="mt-3 max-w-2xl leading-7 text-slate-600">
+                  Retrouvez les informations sur la confidentialité des données de l'application
+                  et la procédure pour demander la suppression d'un compte parent ou d'un profil enfant.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <ButtonLink to="/mbj-kids">Découvrir Mbj Kids</ButtonLink>
+                <ButtonLink to="/mbj-kids/politique-de-confidentialite" icon={ShieldCheck}>
+                  Confidentialité
+                </ButtonLink>
+                <ButtonLink to="/mbj-kids/suppression-du-compte" variant="secondary">
+                  Supprimer un compte
+                </ButtonLink>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="section-pad-sm bg-sky-50/70">
           <div className="site-container">
             <div className="section-card grid gap-6 border-t-4 border-t-[#d65f4a] p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">

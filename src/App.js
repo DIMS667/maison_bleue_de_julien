@@ -23,6 +23,9 @@ import Don               from './pages/Don';
 import DonSuccess        from './pages/DonSuccess';
 import JulienPage        from './pages/JulienPage';
 import MbjPage           from './pages/MbjPage';
+import MbjKidsPage       from './pages/MbjKidsPage';
+import MbjKidsPrivacyPage from './pages/MbjKidsPrivacyPage';
+import MbjKidsDeletionPage from './pages/MbjKidsDeletionPage';
 
 const PdfReaderPage = lazy(() => import('./pages/PdfReaderPage'));
 
@@ -70,6 +73,9 @@ function App() {
             <Route path="/don"                      element={<Don />} />
             <Route path="/don-success"              element={<DonSuccess />} />
             <Route path="/mbj"                      element={<MbjPage />} />
+            <Route path="/mbj-kids"                 element={<MbjKidsPage />} />
+            <Route path="/mbj-kids/politique-de-confidentialite" element={<MbjKidsPrivacyPage />} />
+            <Route path="/mbj-kids/suppression-du-compte" element={<MbjKidsDeletionPage />} />
             <Route path="/julien"                   element={<JulienPage />} />
             <Route
               path="/rapports/:reportId"

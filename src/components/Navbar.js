@@ -32,6 +32,7 @@ const navigation = [
       { name: 'Boutique solidaire', href: '/boutique' },
     ],
   },
+  { name: 'Mbj Kids', href: '/mbj-kids' },
   { name: 'Contact', href: '/contact' },
 ];
 

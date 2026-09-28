@@ -17,6 +17,7 @@ const resourceLinks = [
   { name: 'Boutique solidaire', href: '/boutique' },
   { name: 'Adhérer', href: '/adherer' },
   { name: 'Faire un don', href: '/don' },
+  { name: 'Découvrir Mbj Kids', href: '/mbj-kids' },
   { name: 'Mbj Kids · Confidentialité', href: '/mbj-kids/politique-de-confidentialite' },
   { name: 'Mbj Kids · Supprimer un compte', href: '/mbj-kids/suppression-du-compte' },
 ];
