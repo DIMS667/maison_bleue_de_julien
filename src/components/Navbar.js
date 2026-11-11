@@ -134,7 +134,7 @@ export default function Navbar() {
             </a>
             <span className="header-utility-link header-location">
               <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Nkoabang, Yaoundé</span>
+              <span>Nkoabang, Nkolafamba, Cameroun</span>
             </span>
           </div>
           <SocialLinks />

@@ -22,7 +22,7 @@ const contactCards = [
   {
     title: 'Adresse',
     icon: MapPin,
-    lines: [{ label: 'Nkoabang, Yaoundé, Cameroun' }],
+    lines: [{ label: 'Nkoabang, Nkolafamba, Cameroun' }],
   },
 ];
 

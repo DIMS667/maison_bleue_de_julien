@@ -46,9 +46,9 @@ export default function MbjKidsPage() {
         title="Mbj Kids"
         actions={
           <ButtonLink
-            href="/downloads/mbj-kids-1.0.0.apk"
+            href="/downloads/mbj-kids-1.0.1.apk"
             icon={Download}
-            download="mbj-kids-1.0.0.apk"
+            download="mbj-kids-1.0.1.apk"
           >
             Télécharger l’APK Android
           </ButtonLink>
@@ -56,7 +56,7 @@ export default function MbjKidsPage() {
       >
         Des histoires, des jeux, des pictogrammes et du dessin pour découvrir,
         créer et communiquer à son rythme.
-        <span className="mt-3 block text-sm">Android · version 1.0.0 · téléchargement direct</span>
+        <span className="mt-3 block text-sm">Android · version 1.0.1 · téléchargement direct</span>
       </PageHero>
 
       <section className="section-pad bg-white">

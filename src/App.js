@@ -26,6 +26,9 @@ import MbjPage           from './pages/MbjPage';
 import MbjKidsPage       from './pages/MbjKidsPage';
 import MbjKidsPrivacyPage from './pages/MbjKidsPrivacyPage';
 import MbjKidsDeletionPage from './pages/MbjKidsDeletionPage';
+import CataPage          from './pages/CataPage';
+import MamanEventPage    from './pages/MamanEventPage';
+import SymposiumInclusionPage from './pages/SymposiumInclusionPage';
 
 const PdfReaderPage = lazy(() => import('./pages/PdfReaderPage'));
 
@@ -60,6 +63,9 @@ function App() {
             <Route path="/"                         element={<Accueil />} />
 
             <Route path="/actualite"                element={<Actualite />} />
+            <Route path="/actualites/cata"           element={<CataPage />} />
+            <Route path="/actualites/maman-mais-pas-seulement-2026" element={<MamanEventPage />} />
+            <Route path="/actualites/symposium-africain-inclusion-sociale-2026" element={<SymposiumInclusionPage />} />
             <Route path="/actualites/:slug"         element={<PostDetail />} />
 
             <Route path="/publications"             element={<Publication />} />

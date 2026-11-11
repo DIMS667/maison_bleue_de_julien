@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { fetchArticles } from '../../services/api';
 import PostCard from '../Actualite/PostCard';
 import { PageState } from '../DesignSystem';
+import FeaturedNewsCards from '../Actualite/FeaturedNewsCards';
 
 export default function NewsCards() {
   const navigate = useNavigate();
@@ -51,6 +52,10 @@ export default function NewsCards() {
             <span>Toutes les actualités</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
+        </div>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <FeaturedNewsCards />
         </div>
 
         {loading ? (

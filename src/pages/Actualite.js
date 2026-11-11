@@ -5,6 +5,7 @@ import { fetchArticles } from '../services/api';
 import PostCard from '../components/Actualite/PostCard';
 import EnhancedProgramsSection from '../components/Actualite/ProgramsSection';
 import EnhancedGallerySection from '../components/Actualite/GallerySection';
+import FeaturedNewsCards from '../components/Actualite/FeaturedNewsCards';
 import { ButtonLink, PageHero, PageState, SectionHeading } from '../components/DesignSystem';
 
 export default function Actualite() {
@@ -59,6 +60,12 @@ export default function Actualite() {
               Les initiatives, rencontres, ateliers et temps forts de La Maison
               Bleue de Julien.
             </SectionHeading>
+
+            <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <FeaturedNewsCards />
+            </div>
+
+            <h3 className="mb-6 text-2xl font-extrabold text-blue-950">Plus d’actualités</h3>
 
             {loading ? (
               <PageState title="Chargement des actualités" loading>

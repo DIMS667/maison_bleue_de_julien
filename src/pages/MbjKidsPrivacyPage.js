@@ -25,7 +25,7 @@ export default function MbjKidsPrivacyPage() {
         <div className="site-container grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_17rem]">
           <article className="section-card max-w-4xl p-5 sm:p-8">
             <p className="text-sm text-slate-500">
-              Application : <strong>Mbj Kids</strong> · Dernière mise à jour : <time dateTime="2026-09-27">27 septembre 2026</time>
+              Application : <strong>Mbj Kids</strong> · Dernière mise à jour : <time dateTime="2026-09-28">28 septembre 2026</time>
             </p>
 
             <Section id="responsable" title="Qui est responsable de l'application ?">
@@ -44,7 +44,7 @@ export default function MbjKidsPrivacyPage() {
               </p>
               <p>
                 Un parent peut créer un compte pour ajouter des profils enfant, personnaliser les réglages et consulter
-                le suivi. Il choisit explicitement s'il souhaite rattacher les activités effectuées sans compte à un profil enfant.
+                le suivi. La synchronisation des données enfant est désactivée par défaut : le parent choisit de l'activer avant de créer un profil lié au compte. Il peut l'arrêter dans les réglages. Il choisit aussi explicitement s'il souhaite rattacher les activités effectuées sans compte à un profil enfant.
               </p>
             </Section>
 
@@ -52,7 +52,7 @@ export default function MbjKidsPrivacyPage() {
               <ul className="list-disc space-y-2 pl-6">
                 <li><strong>Compte parent :</strong> prénom, nom, adresse e-mail, informations d'authentification et demandes d'assistance.</li>
                 <li><strong>Profil enfant :</strong> prénom, avatar et réglages sensoriels choisis par le parent, notamment pour le son, la lumière, les couleurs et les transitions.</li>
-                <li><strong>Activités :</strong> progression dans les histoires, résultats des jeux, pictogrammes, favoris et dessins. Les activités rattachées à un profil sont enregistrées sur le serveur pour permettre le suivi.</li>
+                <li><strong>Activités :</strong> progression dans les histoires, résultats des jeux, pictogrammes utilisés, favoris et dessins. Lorsque le parent active la synchronisation, les activités rattachées à un profil sont enregistrées sur le serveur pour permettre le suivi. Désactiver la synchronisation arrête les nouveaux envois mais ne supprime pas les données déjà enregistrées ; le parent peut demander leur suppression depuis son compte. Les photos et catégories de pictogrammes personnalisés créées dans « Je dis » restent sur l'appareil et ne sont pas synchronisées.</li>
                 <li><strong>Données techniques :</strong> les échanges nécessaires au chargement du contenu et à la sécurité du service peuvent produire des journaux techniques. Nous ne demandons pas la localisation précise de l'appareil.</li>
               </ul>
               <p>
@@ -73,10 +73,8 @@ export default function MbjKidsPrivacyPage() {
             <Section id="prestataires" title="Hébergement et services techniques">
               <p>
                 Le serveur de l'application est hébergé chez LWS. Un service d'envoi d'e-mails est utilisé pour les messages
-                liés au compte, notamment les codes de confirmation. Certaines phrases prononcées par la fonction de
-                synthèse vocale sont traitées par un service externe de synthèse vocale (Google via gTTS) : leur texte est
-                transmis pour générer l'audio demandé. Ces prestataires interviennent pour fournir le service, pas pour
-                diffuser de la publicité dans l'application.
+                liés au compte, notamment les codes de confirmation. Les phrases de « Je dis » sont prononcées par la
+                synthèse vocale configurée sur l'appareil ; notre serveur n'envoie plus leur texte à un service vocal externe. Selon les réglages de l'appareil, le moteur vocal choisi par l'utilisateur peut traiter la voix en ligne.
               </p>
             </Section>
 

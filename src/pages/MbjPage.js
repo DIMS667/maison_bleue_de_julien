@@ -112,7 +112,7 @@ export default function MbjPage() {
 
               <aside className="section-card border-l-4 border-l-emerald-500 p-6">
                 <Award className="h-9 w-9 text-emerald-600" aria-hidden="true" />
-                <p className="mt-4 text-2xl font-extrabold text-slate-900">Plus de 15 personnes accompagnées</p>
+                <p className="mt-4 text-2xl font-extrabold text-slate-900">Plus de 30 familles accompagnées</p>
                 <p className="mt-3 leading-7 text-slate-600">
                   Depuis notre création, avec l'appui de bénévoles et partenaires
                   engagés pour promouvoir l'inclusion.

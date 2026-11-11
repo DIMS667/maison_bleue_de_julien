@@ -107,7 +107,7 @@ export default function Footer() {
           <address className="mt-4 space-y-3.5 not-italic text-sm text-slate-300">
             <p className="flex gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
-              <span>Nkoabang, Yaoundé, Cameroun</span>
+              <span>Nkoabang, Nkolafamba, Cameroun</span>
             </p>
             <a href="tel:+237699893838" className="footer-contact-link">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
